@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Your Bag | RapidStore</title>
+<link
+	href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap"
+	rel="stylesheet">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<style>
+:root {
+	--primary: #2563eb;
+	--black: #0f172a;
+	--gray-100: #f8fafc;
+	--gray-200: #e2e8f0;
+	--gray-500: #64748b;
+	--white: #ffffff;
+	--transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+body {
+	background-color: var(--white);
+	color: var(--black);
+}
+
+.container-wide {
+	max-width: 1200px;
+	margin: 0 auto;
+	padding: 0 24px;
+}
+
+/* Navbar */
+.navbar {
+	height: 80px;
+	display: flex;
+	align-items: center;
+	border-bottom: 1px solid var(--gray-200);
+	position: fixed;
+	top: 0;
+	width: 100%;
+	background: white;
+	z-index: 1000;
+}
+
+.nav-container {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	width: 100%;
+}
+
+.logo {
+	font-weight: 800;
+	font-size: 1.5rem;
+	text-decoration: none;
+	color: var(--black);
+	cursor: pointer;
+}
+
+.logo span {
+	color: var(--primary);
+}
+
+.nav-menu a {
+	margin-left: 30px;
+	text-decoration: none;
+	color: var(--black);
+	font-weight: 600;
+	cursor: pointer;
+}
+
+.icon-btn {
+	background: none;
+	border: none;
+	font-size: 1.2rem;
+	position: relative;
+	cursor: pointer;
+	color: var(--black);
+}
+
+.badge {
+	position: absolute;
+	top: -8px;
+	right: -8px;
+	background: var(--primary);
+	color: white;
+	font-size: 10px;
+	width: 18px;
+	height: 18px;
+	border-radius: 50%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-weight: 800;
+}
+
+/* Cart Layout */
+.section-padding {
+	padding: 120px 0 80px;
+}
+
+.display-title {
+	font-size: 2.5rem;
+	font-weight: 800;
+	margin-bottom: 40px;
+}
+
+.cart-container {
+	display: grid;
+	grid-template-columns: 1.8fr 1fr;
+	gap: 60px;
+}
+
+.cart-item {
+	display: flex;
+	align-items: center;
+	padding: 25px 0;
+	border-bottom: 1px solid var(--gray-200);
+}
+
+.cart-item img {
+	width: 120px;
+	height: 140px;
+	object-fit: cover;
+	border-radius: 12px;
+	background: var(--gray-100);
+}
+
+.item-details {
+	flex: 1;
+	padding: 0 25px;
+}
+
+.item-details h4 {
+	font-size: 1.2rem;
+	margin-bottom: 5px;
+}
+
+.item-details .price {
+	font-weight: 700;
+	color: var(--primary);
+}
+
+.quantity-controls {
+	display: flex;
+	align-items: center;
+	gap: 15px;
+	margin-top: 15px;
+}
+
+.quantity-controls button {
+	width: 30px;
+	height: 30px;
+	border-radius: 50%;
+	border: 1px solid var(--gray-200);
+	background: white;
+	cursor: pointer;
+	font-weight: bold;
+	transition: var(--transition);
+}
+
+.quantity-controls button:hover {
+	background: var(--black);
+	color: white;
+}
+
+.remove-btn {
+	background: none;
+	border: none;
+	color: var(--gray-400);
+	cursor: pointer;
+	font-size: 1.2rem;
+	transition: 0.2s;
+}
+
+.remove-btn:hover {
+	color: #ef4444;
+}
+
+/* Sidebar Summary */
+.cart-summary {
+	background: var(--gray-100);
+	padding: 40px;
+	border-radius: 24px;
+	height: fit-content;
+	position: sticky;
+	top: 120px;
+}
+
+.summary-row {
+	display: flex;
+	justify-content: space-between;
+	margin-bottom: 15px;
+	font-weight: 500;
+}
+
+.summary-row.total {
+	border-top: 1px solid var(--gray-200);
+	padding-top: 20px;
+	margin-top: 20px;
+	font-size: 1.4rem;
+	font-weight: 800;
+}
+
+.btn-checkout {
+	width: 100%;
+	background: var(--black);
+	color: white;
+	padding: 18px;
+	border: none;
+	border-radius: 12px;
+	font-weight: 800;
+	font-size: 1rem;
+	cursor: pointer;
+	margin-top: 25px;
+	transition: var(--transition);
+	display: block;
+	text-align: center;
+	text-decoration: none;
+}
+
+.btn-checkout:hover {
+	opacity: 0.9;
+	transform: translateY(-2px);
+}
+
+.empty-state {
+	text-align: center;
+	padding: 100px 0;
+	grid-column: span 2;
+}
+
+.continue-shopping {
+	display: inline-block;
+	margin-top: 20px;
+	color: var(--primary);
+	text-decoration: none;
+	font-weight: 700;
+	cursor: pointer;
+}
+
+@media ( max-width : 992px) {
+	.cart-container {
+		grid-template-columns: 1fr;
+	}
+}
+</style>
+</head>
+<body>
+
+	<header class="navbar">
+		<div class="nav-container container-wide">
+			<a href="index.html" class="logo">RAPID<span>STORE</span></a>
+			<nav class="nav-menu">
+				<a href="index.html">Home</a> <a href="products.html">Shop All</a>
+			</nav>
+			<div class="nav-icons">
+				<button class="icon-btn">
+					<i class="fa-solid fa-cart-shopping"></i> <span class="badge"
+						id="badge-count">0</span>
+				</button>
+			</div>
+		</div>
+	</header>
+
+	<section class="section-padding">
+		<div class="container-wide">
+			<h1 class="display-title">Shopping Bag</h1>
+
+			<div class="cart-container" id="cart-content">
+				<div class="cart-items-wrapper" id="cart-items-list"></div>
+
+				<div class="cart-summary" id="summary-box">
+					<h3>Order Summary</h3>
+					<div class="summary-row">
+						<span>Subtotal</span><span id="subtotal">$0.00</span>
+					</div>
+					<div class="summary-row">
+						<span>Shipping</span><span
+							style="color: #10b981; font-weight: 700;">FREE</span>
+					</div>
+					<div class="summary-row total">
+						<span>Total</span><span id="total-price">$0.00</span>
+					</div>
+
+					<a href="checkout.html" class="btn-checkout">Proceed to
+						Checkout</a>
+
+					<center>
+						<a href="products.html" class="continue-shopping">← Continue
+							Shopping</a>
+					</center>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<script>
+        // --- LOGIC TO SYNC WITH USER-SPECIFIC STORAGE ---
+        function getCartKey() {
+            const user = JSON.parse(localStorage.getItem('rapidUser'));
+            return user ? `rapidCart_${user.id}` : null;
+        }
+
+        function getCartItems() {
+            const key = getCartKey();
+            if (!key) return [];
+            return JSON.parse(localStorage.getItem(key)) || [];
+        }
+
+        function renderCart() {
+            const user = JSON.parse(localStorage.getItem('rapidUser'));
+            
+            // If no user is logged in, they shouldn't be here
+            if(!user) {
+                document.getElementById('cart-content').innerHTML = `
+                    <div class="empty-state">
+                        <i class="fa-solid fa-user-lock" style="font-size: 4rem; color: var(--gray-200); margin-bottom: 20px;"></i>
+                        <h2>Please sign in to view your bag</h2>
+                        <a href="login.html" class="continue-shopping">Login Now</a>
+                    </div>
+                `;
+                return;
+            }
+
+            const cart = getCartItems();
+            const list = document.getElementById('cart-items-list');
+            const subtotalEl = document.getElementById('subtotal');
+            const totalEl = document.getElementById('total-price');
+            const badge = document.getElementById('badge-count');
+            const cartContent = document.getElementById('cart-content');
+            
+            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+            badge.innerText = totalItems;
+
+            if(cart.length === 0) {
+                cartContent.innerHTML = `
+                    <div class="empty-state">
+                        <i class="fa-solid fa-bag-shopping" style="font-size: 4rem; color: var(--gray-200); margin-bottom: 20px;"></i>
+                        <h2>Your bag is empty</h2>
+                        <a href="products.html" class="continue-shopping">Explore Products</a>
+                    </div>
+                `;
+                return;
+            }
+
+            let total = 0;
+            list.innerHTML = cart.map((item, index) => {
+                const imagePath = item.image || item.imageUrl || item.image_url;
+                const name = item.name || "Unknown Product";
+                const price = item.price || 0;
+                
+                total += price * item.quantity;
+                
+                return `
+                    <div class="cart-item">
+                        <img src="${imagePath}" alt="${name}" onerror="this.src='https://via.placeholder.com/120x140?text=Broken+Link'">
+                        <div class="item-details">
+                            <h4>${name}</h4>
+                            <p class="price">$${price.toFixed(2)}</p>
+                            <div class="quantity-controls">
+                                <button onclick="changeQty(${index}, -1)">-</button>
+                                <span>${item.quantity}</span>
+                                <button onclick="changeQty(${index}, 1)">+</button>
+                            </div>
+                        </div>
+                        <button class="remove-btn" onclick="removeItem(${index})"><i class="fa-solid fa-trash-can"></i></button>
+                    </div>
+                `;
+            }).join('');
+
+            subtotalEl.innerText = `$${total.toFixed(2)}`;
+            totalEl.innerText = `$${total.toFixed(2)}`;
+        }
+
+        function changeQty(index, delta) {
+            let cart = getCartItems();
+            cart[index].quantity += delta;
+            
+            if(cart[index].quantity < 1) {
+                cart.splice(index, 1);
+            }
+            
+            saveCart(cart);
+            renderCart();
+        }
+
+        function removeItem(index) {
+            let cart = getCartItems();
+            cart.splice(index, 1);
+            saveCart(cart);
+            renderCart();
+        }
+
+        function saveCart(cartArray) {
+            const key = getCartKey();
+            if (key) {
+                localStorage.setItem(key, JSON.stringify(cartArray));
+            }
+        }
+
+        window.onload = renderCart;
+    </script>
+</body>
+</html>

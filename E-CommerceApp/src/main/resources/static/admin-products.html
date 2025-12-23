@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>RapidStore | Master Admin</title>
+<link
+	href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap"
+	rel="stylesheet">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+:root {
+	--primary: #2563eb;
+	--black: #0f172a;
+	--gray-100: #f8fafc;
+	--gray-200: #e2e8f0;
+	--gray-500: #64748b;
+	--danger: #ef4444;
+	--success: #10b981;
+}
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+body {
+	background: var(--gray-100);
+	display: flex;
+	min-height: 100vh;
+}
+
+/* Sidebar */
+.sidebar {
+	width: 260px;
+	background: var(--black);
+	color: white;
+	padding: 30px 20px;
+	position: fixed;
+	height: 100vh;
+	z-index: 10;
+}
+
+.sidebar h2 {
+	font-size: 1.2rem;
+	margin-bottom: 40px;
+	color: var(--primary);
+	font-weight: 800;
+	letter-spacing: -1px;
+}
+
+.nav-item {
+	padding: 15px;
+	margin-bottom: 10px;
+	cursor: pointer;
+	border-radius: 12px;
+	display: flex;
+	align-items: center;
+	gap: 12px;
+	color: #94a3b8;
+	transition: 0.3s;
+}
+
+.nav-item:hover {
+	background: rgba(37, 99, 235, 0.1);
+	color: white;
+}
+
+.nav-item.active {
+	background: var(--primary);
+	color: white;
+}
+
+/* Layout */
+.main-content {
+	margin-left: 260px;
+	padding: 40px;
+	width: calc(100% - 260px);
+}
+
+.tab-content {
+	display: none;
+	animation: fadeIn 0.3s ease;
+}
+
+.tab-content.active {
+	display: block;
+}
+
+@
+keyframes fadeIn {from { opacity:0;
+	transform: translateY(10px);
+}
+
+to {
+	opacity: 1;
+	transform: translateY(0);
+}
+
+}
+
+/* Cards */
+.card {
+	background: white;
+	padding: 30px;
+	border-radius: 24px;
+	box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+	margin-bottom: 30px;
+	border: 1px solid var(--gray-200);
+}
+
+.card h3 {
+	font-size: 1.25rem;
+	font-weight: 800;
+	margin-bottom: 20px;
+	color: var(--black);
+}
+
+/* Table */
+table {
+	width: 100%;
+	border-collapse: collapse;
+	margin-top: 10px;
+}
+
+th {
+	text-align: left;
+	padding: 15px;
+	color: var(--gray-500);
+	border-bottom: 2px solid var(--gray-100);
+	text-transform: uppercase;
+	font-size: 0.75rem;
+	letter-spacing: 1px;
+	font-weight: 700;
+}
+
+td {
+	padding: 15px;
+	border-bottom: 1px solid var(--gray-100);
+	vertical-align: middle;
+	font-size: 0.95rem;
+}
+
+/* Inputs */
+input {
+	width: 100%;
+	padding: 14px;
+	border: 1px solid var(--gray-200);
+	border-radius: 12px;
+	font-size: 0.9rem;
+	transition: 0.3s;
+}
+
+input:focus {
+	outline: none;
+	border-color: var(--primary);
+	box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1);
+}
+
+.search-container {
+	margin-bottom: 20px;
+	position: relative;
+}
+
+.search-container i {
+	position: absolute;
+	right: 20px;
+	top: 50%;
+	transform: translateY(-50%);
+	color: var(--gray-500);
+}
+
+.btn-primary {
+	background: var(--primary);
+	color: white;
+	border: none;
+	padding: 14px 28px;
+	border-radius: 12px;
+	cursor: pointer;
+	font-weight: 700;
+	transition: 0.3s;
+	width: fit-content;
+}
+
+.btn-primary:hover {
+	transform: translateY(-2px);
+	box-shadow: 0 5px 15px rgba(37, 99, 235, 0.3);
+}
+
+.product-img {
+	width: 50px;
+	height: 50px;
+	border-radius: 10px;
+	object-fit: cover;
+	background: var(--gray-100);
+	border: 1px solid var(--gray-200);
+}
+
+.delete-icon {
+	color: var(--danger);
+	cursor: pointer;
+	transition: 0.2s;
+	padding: 8px;
+	border-radius: 8px;
+}
+
+.delete-icon:hover {
+	background: #fee2e2;
+	transform: scale(1.1);
+}
+
+.empty-state {
+	text-align: center;
+	padding: 40px;
+	color: var(--gray-500);
+}
+
+.status-badge {
+	padding: 4px 10px;
+	border-radius: 6px;
+	font-size: 0.75rem;
+	font-weight: 700;
+	background: #e0f2fe;
+	color: var(--primary);
+}
+</style>
+</head>
+<body>
+
+	<div class="sidebar">
+		<h2>
+			RAPIDSTORE <span>ADMIN</span>
+		</h2>
+		<div class="nav-item active" id="nav-inventory"
+			onclick="switchTab('inventory')">
+			<i class="fa-solid fa-box"></i> Inventory
+		</div>
+		<div class="nav-item" id="nav-orders" onclick="switchTab('orders')">
+			<i class="fa-solid fa-cart-shopping"></i> Orders
+		</div>
+		<div class="nav-item" id="nav-messages"
+			onclick="switchTab('messages')">
+			<i class="fa-solid fa-envelope"></i> Messages
+		</div>
+		<div class="nav-item" id="nav-customers"
+			onclick="switchTab('customers')">
+			<i class="fa-solid fa-users"></i> Customers
+		</div>
+		<div class="nav-item" onclick="window.location.href='index.html'"
+			style="margin-top: 50px; opacity: 0.8;">
+			<i class="fa-solid fa-arrow-left"></i> View Site
+		</div>
+	</div>
+
+	<div class="main-content">
+		<div id="inventory" class="tab-content active">
+			<div class="card">
+				<h3>
+					<i class="fa-solid fa-plus-circle" style="color: var(--primary)"></i>
+					Add New Product
+				</h3>
+				<div
+					style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 15px; margin-bottom: 20px;">
+					<input type="text" id="pName" placeholder="Product Name"> <input
+						type="number" id="pPrice" placeholder="Price ($)"> <input
+						type="text" id="pImg" placeholder="Image URL">
+				</div>
+				<button class="btn-primary" id="saveBtn" onclick="addProduct()">
+					<i class="fa-solid fa-cloud-arrow-up"></i> Save to Inventory
+				</button>
+			</div>
+
+			<div class="card">
+				<h3>Manage Products</h3>
+				<table>
+					<thead>
+						<tr>
+							<th>Image</th>
+							<th>Product Details</th>
+							<th>Price</th>
+							<th>Action</th>
+						</tr>
+					</thead>
+					<tbody id="product-tbody"></tbody>
+				</table>
+			</div>
+		</div>
+
+		<div id="orders" class="tab-content">
+			<div class="card">
+				<h3>Recent Customer Orders</h3>
+				<table>
+					<thead>
+						<tr>
+							<th>Order ID</th>
+							<th>Customer</th>
+							<th>Shipping Address</th>
+							<th>Total Amount</th>
+							<th>Status</th>
+						</tr>
+					</thead>
+					<tbody id="order-tbody"></tbody>
+				</table>
+			</div>
+		</div>
+
+		<div id="messages" class="tab-content">
+			<div class="card">
+				<h3>Customer Inquiries</h3>
+				<table>
+					<thead>
+						<tr>
+							<th>Received At</th>
+							<th>Customer</th>
+							<th>Inquiry Details</th>
+							<th>Action</th>
+						</tr>
+					</thead>
+					<tbody id="message-tbody"></tbody>
+				</table>
+			</div>
+		</div>
+
+		<div id="customers" class="tab-content">
+			<div class="card">
+				<h3>Registered Customers</h3>
+
+				<div class="search-container">
+					<input type="text" id="customerSearch"
+						placeholder="Search by name or email..."
+						onkeyup="filterCustomers()"> <i
+						class="fa-solid fa-magnifying-glass"></i>
+				</div>
+
+				<table>
+					<thead>
+						<tr>
+							<th>Customer Name</th>
+							<th>Email Address</th>
+							<th>Customer Address</th>
+							<th>Action</th>
+						</tr>
+					</thead>
+					<tbody id="customer-tbody"></tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+
+	<script>
+        const API_BASE = "http://localhost:8080/api";
+        let allCustomers = []; // Global storage for search
+
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+            
+            document.getElementById(tabId).classList.add('active');
+            document.getElementById('nav-' + tabId).classList.add('active');
+            
+            if(tabId === 'inventory') loadProducts();
+            if(tabId === 'orders') loadOrders();
+            if(tabId === 'messages') loadMessages();
+            if(tabId === 'customers') loadCustomers();
+        }
+
+        // --- INVENTORY LOGIC ---
+        async function loadProducts() {
+            const tbody = document.getElementById('product-tbody');
+            tbody.innerHTML = '<tr><td colspan="4" class="empty-state"><i class="fa-solid fa-spinner fa-spin"></i> Fetching...</td></tr>';
+            try {
+                const res = await fetch(`${API_BASE}/products`);
+                const data = await res.json();
+                if(data.length === 0) {
+                    tbody.innerHTML = '<tr><td colspan="4" class="empty-state">No products found.</td></tr>';
+                    return;
+                }
+                tbody.innerHTML = data.map(p => `
+                    <tr>
+                        <td><img src="${p.imageUrl}" class="product-img" onerror="this.src='https://via.placeholder.com/50?text=NA'"></td>
+                        <td><span class="status-badge">ID: #${p.id}</span><br><strong>${p.name}</strong></td>
+                        <td><strong style="color:var(--success)">$${parseFloat(p.price).toFixed(2)}</strong></td>
+                        <td><i class="fa-solid fa-trash-can delete-icon" onclick="deleteProduct(${p.id})"></i></td>
+                    </tr>
+                `).join('');
+            } catch (e) { tbody.innerHTML = '<tr><td colspan="4" class="empty-state">Backend Offline.</td></tr>'; }
+        }
+
+        async function addProduct() {
+            const name = document.getElementById('pName').value;
+            const price = document.getElementById('pPrice').value;
+            const img = document.getElementById('pImg').value;
+            if(!name || !price) return alert("Please enter name and price");
+            try {
+                const res = await fetch(`${API_BASE}/products/add`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ name, price: parseFloat(price), imageUrl: img })
+                });
+                if(res.ok) {
+                    document.getElementById('pName').value = '';
+                    document.getElementById('pPrice').value = '';
+                    document.getElementById('pImg').value = '';
+                    loadProducts();
+                }
+            } catch(e) { alert("Error saving product."); }
+        }
+
+        async function deleteProduct(id) {
+            if(!confirm("Delete this product?")) return;
+            await fetch(`${API_BASE}/products/delete/${id}`, { method: 'DELETE' });
+            loadProducts();
+        }
+
+        // --- ORDER LOGIC ---
+        async function loadOrders() {
+            const tbody = document.getElementById('order-tbody');
+            tbody.innerHTML = '<tr><td colspan="5" class="empty-state"><i class="fa-solid fa-spinner fa-spin"></i> Loading Orders...</td></tr>';
+            try {
+                const res = await fetch(`${API_BASE}/admin/orders`);
+                const data = await res.json();
+                if(data.length === 0) {
+                    tbody.innerHTML = '<tr><td colspan="5" class="empty-state">No orders placed yet.</td></tr>';
+                    return;
+                }
+                tbody.innerHTML = data.map(o => `
+                    <tr>
+                        <td><strong>#ORD-${o.id}</strong></td> 
+                        <td><strong>${o.user ? o.user.fullName : 'Unknown User'}</strong><br><small>${o.user ? o.user.email : ''}</small></td>
+                        <td>${o.user ? (o.user.address || 'No Address Provided') : 'N/A'}</td>
+                        <td><strong style="color:var(--success)">$${parseFloat(o.totalAmount).toFixed(2)}</strong></td>
+                        <td><span class="status-badge">${o.status}</span></td>
+                    </tr>
+                    
+                    
+                `).join('');
+            } catch (e) {
+                tbody.innerHTML = '<tr><td colspan="5" class="empty-state">Error loading orders.</td></tr>';
+            }
+        }
+
+        // --- MESSAGE LOGIC ---
+        async function loadMessages() {
+            const tbody = document.getElementById('message-tbody');
+            try {
+                const res = await fetch(`${API_BASE}/contact/all`);
+                const data = await res.json();
+                tbody.innerHTML = data.map(m => `
+                    <tr>
+                        <td>${new Date(m.submittedAt || Date.now()).toLocaleDateString()}</td>
+                        <td><strong>${m.name}</strong><br><small>${m.email}</small></td>
+                        <td><strong>${m.subject}</strong><p>${m.message}</p></td>
+                        <td><i class="fa-solid fa-trash-can delete-icon" onclick="deleteMessage(${m.id})"></i></td>
+                    </tr>
+                `).join('');
+            } catch (err) { tbody.innerHTML = '<tr><td colspan="4">Error loading messages.</td></tr>'; }
+        }
+
+        async function deleteMessage(id) {
+            if(confirm("Delete message?")) {
+                await fetch(`${API_BASE}/contact/delete/${id}`, { method: 'DELETE' });
+                loadMessages();
+            }
+        }
+
+        // --- CUSTOMER LOGIC ---
+        async function loadCustomers() {
+            const tbody = document.getElementById('customer-tbody');
+            tbody.innerHTML = '<tr><td colspan="4" class="empty-state"><i class="fa-solid fa-spinner fa-spin"></i> Loading...</td></tr>';
+            try {
+                const res = await fetch("http://localhost:8080/api/admin/users");
+                if (!res.ok) throw new Error(`Server Error: ${res.status}`);
+                allCustomers = await res.json();
+                displayCustomers(allCustomers); 
+            } catch (e) {
+                tbody.innerHTML = `<tr><td colspan="4" style="color:red">Error: ${e.message}</td></tr>`;
+            }
+        }
+
+       function displayCustomers(data) {
+    const tbody = document.getElementById('customer-tbody');
+    tbody.innerHTML = data.map(c => `
+        <tr>
+            <td><strong>${c.fullName}</strong></td>
+            <td>${c.email}</td> 
+            <td class="address-text">${c.address || 'No Address Provided'}</td>
+            <td><i class="fa-solid fa-trash-can delete-icon" onclick="deleteCustomer(${c.id})"></i></td>
+        </tr>
+    `).join('');
+}
+
+        function filterCustomers() {
+            const searchTerm = document.getElementById('customerSearch').value.toLowerCase();
+            const filtered = allCustomers.filter(c => 
+                (c.fullName && c.fullName.toLowerCase().includes(searchTerm)) || 
+                (c.email && c.email.toLowerCase().includes(searchTerm))
+            );
+            displayCustomers(filtered);
+        } 
+
+        async function deleteCustomer(id) {
+            if(!confirm("Delete user permanently?")) return;
+            const res = await fetch(`${API_BASE}/admin/users/${id}`, { method: 'DELETE' });
+            if(res.ok) loadCustomers();
+            else alert("Cannot delete user (Check for active orders/cart).");
+        }
+
+        window.onload = loadProducts;
+    </script>
+</body>
+</html>

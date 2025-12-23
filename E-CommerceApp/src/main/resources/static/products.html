@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>All Products | RapidStore Official</title>
+<link
+	href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap"
+	rel="stylesheet">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<style>
+:root {
+	--primary: #2563eb;
+	--primary-light: #7dd3fc;
+	--primary-soft: #eff6ff;
+	--black: #0f172a;
+	--white: #ffffff;
+	--gray-50: #f8fafc;
+	--gray-100: #f1f5f9;
+	--gray-200: #e2e8f0;
+	--gray-500: #64748b;
+	--transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+	--shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.05);
+	--shadow-md: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
+}
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+body {
+	background-color: var(--white);
+	padding-top: 65px;
+}
+
+.container-wide {
+	max-width: 1400px;
+	margin: 0 auto;
+	padding: 0 40px;
+}
+
+/* --- MODERN NAVBAR (65px) --- */
+.navbar {
+	height: 65px;
+	display: flex;
+	align-items: center;
+	position: fixed;
+	top: 0;
+	width: 100%;
+	z-index: 1000;
+	background: rgba(255, 255, 255, 0.9);
+	backdrop-filter: blur(15px);
+	border-bottom: 1px solid var(--gray-200);
+}
+
+.nav-container {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	width: 100%;
+}
+
+.logo {
+	font-weight: 800;
+	font-size: 1.4rem;
+	text-decoration: none;
+	color: var(--black);
+	letter-spacing: -1px;
+}
+
+.logo span {
+	color: var(--primary);
+}
+
+.nav-menu a {
+	margin-left: 30px;
+	text-decoration: none;
+	color: var(--black);
+	font-weight: 700;
+	font-size: 0.9rem;
+	transition: var(--transition);
+}
+
+.nav-menu a:hover {
+	color: var(--primary);
+}
+
+.nav-icons {
+	display: flex;
+	align-items: center;
+	gap: 15px;
+}
+
+.icon-btn {
+	background: none;
+	border: none;
+	font-size: 1.2rem;
+	cursor: pointer;
+	color: var(--black);
+	position: relative;
+	text-decoration: none;
+	display: flex;
+	align-items: center;
+}
+
+.user-profile-nav {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+	padding-left: 15px;
+	border-left: 1px solid var(--gray-200);
+}
+
+.user-name {
+	font-weight: 800;
+	font-size: 0.85rem;
+}
+
+.user-name span {
+	color: var(--primary);
+}
+
+.logout-btn {
+	background: none;
+	border: none;
+	font-size: 1rem;
+	cursor: pointer;
+	color: #ef4444;
+	transition: var(--transition);
+}
+
+.logout-btn:hover {
+	transform: scale(1.1);
+}
+
+.badge {
+	position: absolute;
+	top: -6px;
+	right: -8px;
+	background: var(--primary);
+	color: white;
+	font-size: 9px;
+	width: 16px;
+	height: 16px;
+	border-radius: 50%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-weight: 800;
+	border: 2px solid var(--white);
+}
+
+/* --- LOGOUT MODAL STYLES --- */
+.modal-overlay {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(15, 23, 42, 0.6);
+	backdrop-filter: blur(4px);
+	display: none;
+	align-items: center;
+	justify-content: center;
+	z-index: 3000;
+}
+
+.modal-content {
+	background: white;
+	padding: 40px;
+	border-radius: 24px;
+	max-width: 400px;
+	width: 90%;
+	text-align: center;
+	box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+	transform: scale(0.9);
+	transition: var(--transition);
+}
+
+.modal-overlay.active {
+	display: flex;
+}
+
+.modal-overlay.active .modal-content {
+	transform: scale(1);
+}
+
+.modal-btns {
+	display: flex;
+	gap: 15px;
+	margin-top: 30px;
+}
+
+.modal-btn {
+	flex: 1;
+	padding: 14px;
+	border-radius: 12px;
+	border: none;
+	font-weight: 700;
+	cursor: pointer;
+	transition: 0.2s;
+}
+
+.btn-confirm {
+	background: #ef4444;
+	color: white;
+}
+
+.btn-cancel {
+	background: var(--gray-100);
+	color: var(--black);
+}
+
+/* --- HEADER & FILTERS --- */
+.page-header {
+	padding: 60px 0 40px;
+	text-align: center;
+}
+
+.page-header h1 {
+	font-size: 3rem;
+	font-weight: 800;
+	margin-bottom: 15px;
+}
+
+.search-box {
+	position: relative;
+	max-width: 500px;
+	margin: 20px auto 0;
+}
+
+.search-box i {
+	position: absolute;
+	left: 20px;
+	top: 50%;
+	transform: translateY(-50%);
+	color: var(--gray-500);
+}
+
+.search-box input {
+	width: 100%;
+	padding: 16px 20px 16px 50px;
+	border-radius: 12px;
+	border: 1px solid var(--gray-200);
+	outline: none;
+	transition: var(--transition);
+}
+
+.search-box input:focus {
+	border-color: var(--primary);
+	box-shadow: 0 0 0 4px var(--primary-soft);
+}
+
+.category-filters {
+	padding-bottom: 40px;
+	display: flex;
+	justify-content: center;
+	gap: 10px;
+	flex-wrap: wrap;
+}
+
+.filter-btn {
+	padding: 8px 20px;
+	border-radius: 10px;
+	border: 1px solid var(--gray-200);
+	background: var(--white);
+	font-weight: 700;
+	cursor: pointer;
+	color: var(--gray-500);
+	transition: var(--transition);
+}
+
+.filter-btn.active {
+	background: var(--black);
+	color: var(--white);
+	border-color: var(--black);
+}
+
+/* --- PRODUCT GRID --- */
+.product-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+	gap: 30px;
+}
+
+.img-wrapper {
+	position: relative;
+	aspect-ratio: 4/5;
+	background: var(--gray-50);
+	border-radius: 20px;
+	overflow: hidden;
+	margin-bottom: 15px;
+}
+
+.img-wrapper img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	transition: var(--transition);
+}
+
+.overlay-controls {
+	position: absolute;
+	bottom: -70px;
+	left: 0;
+	width: 100%;
+	display: flex;
+	transition: var(--transition);
+}
+
+.product-card:hover .overlay-controls {
+	bottom: 0;
+}
+
+.product-card:hover img {
+	transform: scale(1.05);
+}
+
+.action-btn {
+	flex: 1;
+	padding: 18px 5px;
+	border: none;
+	font-weight: 800;
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 8px;
+}
+
+.btn-quick-add {
+	background: var(--primary);
+	color: white;
+}
+
+.btn-buy-now {
+	background: var(--black);
+	color: white;
+}
+
+.footer-premium {
+	background: var(--gray-50);
+	padding: 60px 0;
+	border-top: 1px solid var(--gray-200);
+	text-align: center;
+	color: var(--gray-500);
+}
+</style>
+</head>
+<body>
+
+	<div class="modal-overlay" id="logoutModal">
+		<div class="modal-content">
+			<i class="fa-solid fa-circle-question"
+				style="font-size: 3rem; color: var(--primary); margin-bottom: 20px;"></i>
+			<h2 style="font-weight: 800; margin-bottom: 10px;">Confirm
+				Logout</h2>
+			<p style="color: var(--gray-500);">Are you sure you want to
+				logout?</p>
+			<div class="modal-btns">
+				<button class="modal-btn btn-cancel" onclick="closeLogoutModal()">Cancel</button>
+				<button class="modal-btn btn-confirm" onclick="confirmLogout()">Yes,
+					Logout</button>
+			</div>
+		</div>
+	</div>
+
+	<header class="navbar">
+		<div class="nav-container container-wide">
+			<a href="index.html" class="logo">RAPID<span>STORE</span></a>
+			<nav class="nav-menu">
+				<a href="index.html">Home</a> <a href="products.html"
+					style="color: var(--primary)">Shop All</a>
+			</nav>
+			<div class="nav-icons" id="navIconsContainer"></div>
+		</div>
+	</header>
+
+	<section class="page-header">
+		<div class="container-wide">
+			<h1>Our Catalog</h1>
+			<div class="search-box">
+				<i class="fa-solid fa-magnifying-glass"></i> <input type="text"
+					id="productSearch" placeholder="Search our premium collection...">
+			</div>
+		</div>
+	</section>
+
+	<div class="category-filters">
+		<button class="filter-btn active"
+			onclick="filterByCategory('All', this)">All Collections</button>
+		<button class="filter-btn"
+			onclick="filterByCategory('Electronics', this)">Electronics</button>
+		<button class="filter-btn" onclick="filterByCategory('Fashion', this)">Fashion</button>
+		<button class="filter-btn" onclick="filterByCategory('Kitchen', this)">Kitchen</button>
+		<button class="filter-btn"
+			onclick="filterByCategory('Home Decor', this)">Home
+			Decoration</button>
+	</div>
+
+	<section class="section-padding">
+		<div class="container-wide">
+			<div class="product-grid" id="full-product-grid"></div>
+			<div id="pagination-controls"></div>
+		</div>
+	</section>
+
+	<footer class="footer-premium">
+		<p>&copy; 2025 RapidStore. Engineered by Prasad Magar.</p>
+	</footer>
+
+	<script>
+        let currentCategory = "All";
+        let currentPage = 0;
+        let debounceTimer;
+
+        function getCartKey() {
+            const user = JSON.parse(localStorage.getItem('rapidUser'));
+            return user ? `rapidCart_${user.id}` : null;
+        }
+
+        function updateNavbar() {
+            const user = JSON.parse(localStorage.getItem('rapidUser'));
+            const cartKey = getCartKey();
+            const cartItems = cartKey ? (JSON.parse(localStorage.getItem(cartKey)) || []) : [];
+            const cartCount = cartItems.reduce((sum, item) => sum + item.quantity, 0);
+
+            const navIcons = document.getElementById('navIconsContainer');
+
+            let html = `
+                <a href="cart.html" class="icon-btn">
+                    <i class="fa-solid fa-bag-shopping"></i>
+                    ${cartCount > 0 ? `<span class="badge" id="cartBadge">${cartCount}</span>` : ''}
+                </a>
+            `;
+
+            if (user) {
+                html += `
+                    <div class="user-profile-nav">
+                        <span class="user-name">Hi, <span>${user.fullName.split(' ')[0]}</span></span>
+                        <button onclick="openLogoutModal()" class="logout-btn"><i class="fa-solid fa-power-off"></i></button>
+                    </div>
+                `;
+            } else {
+                html += `
+                <a href="login.html" class="icon-btn" style="font-size:0.9rem; font-weight:700;">Login</a>
+                <a href="signup.html" class="icon-btn" style="background:var(--black); color:white; padding:8px 15px; border-radius:8px; font-size:0.8rem; font-weight:700;">Signup</a>`;
+            }
+            navIcons.innerHTML = html;
+        }
+
+        // --- MODAL CONTROLS ---
+        function openLogoutModal() {
+            document.getElementById('logoutModal').classList.add('active');
+        }
+
+        function closeLogoutModal() {
+            document.getElementById('logoutModal').classList.remove('active');
+        }
+
+        function confirmLogout() { 
+            localStorage.removeItem('rapidUser'); 
+            window.location.reload(); 
+        }
+
+        async function loadProducts(query = "", category = "All", page = 0) {
+            const grid = document.getElementById('full-product-grid');
+            currentPage = page;
+            
+            let url = `http://localhost:8080/api/products/filter?category=${encodeURIComponent(category)}&page=${page}`;
+            if (query.trim()) url = `http://localhost:8080/api/products/search?name=${encodeURIComponent(query)}&page=${page}`;
+
+            try {
+                const response = await fetch(url);
+                const data = await response.json();
+                const products = data.content;
+
+                if (!products || products.length === 0) {
+                    grid.innerHTML = `<div style="grid-column: 1/-1; text-align: center; padding: 100px 0;">
+                        <i class="fa-solid fa-box-open" style="font-size: 3rem; color: var(--gray-200); margin-bottom: 20px;"></i>
+                        <p style="color: var(--gray-500); font-weight: 600;">No items match your search.</p>
+                    </div>`;
+                    return;
+                }
+
+                grid.innerHTML = products.map(p => `
+                    <div class="product-card">
+                        <div class="img-wrapper">
+                            <img src="${p.imageUrl}" alt="${p.name}">
+                            <div class="overlay-controls">
+                                <button class="action-btn btn-quick-add" onclick="addToCart(${p.id}, '${p.name.replace(/'/g, "\\'")}', ${p.price}, '${p.imageUrl}', event)">
+                                    <i class="fa-solid fa-cart-plus"></i> Add
+                                </button>
+                                <button class="action-btn btn-buy-now" onclick="window.location.href='product-details.html?id=${p.id}'">
+                                    <i class="fa-solid fa-bolt"></i> Buy
+                                </button>
+                            </div>
+                        </div>
+                        <div class="product-info">
+                            <h3>${p.name}</h3>
+                            <p class="price">$${p.price.toFixed(2)}</p>
+                        </div>
+                    </div>`).join('');
+
+                renderPagination(data);
+            } catch (e) {
+                grid.innerHTML = `<p style="grid-column: 1/-1; text-align: center;">Backend Connection Error.</p>`;
+            }
+        }
+
+        document.getElementById('productSearch').addEventListener('input', (e) => {
+            clearTimeout(debounceTimer);
+            debounceTimer = setTimeout(() => loadProducts(e.target.value, currentCategory, 0), 300);
+        });
+
+        function filterByCategory(category, btn) {
+            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            currentCategory = category;
+            loadProducts(document.getElementById('productSearch').value, category, 0);
+        }
+
+        function renderPagination(data) {
+            const container = document.getElementById('pagination-controls');
+            let html = '';
+            if (!data.first) html += `<button class="filter-btn" onclick="loadProducts('', currentCategory, ${currentPage - 1})">← Prev</button>`;
+            if (data.totalPages > 1) html += `<span style="font-weight:800; font-size: 0.9rem;">${data.number + 1} / ${data.totalPages}</span>`;
+            if (!data.last) html += `<button class="filter-btn" onclick="loadProducts('', currentCategory, ${currentPage + 1})">Next →</button>`;
+            container.innerHTML = html;
+        }
+
+        async function addToCart(productId, productName, productPrice, productImg, event) {
+            const user = JSON.parse(localStorage.getItem('rapidUser'));
+            
+            if (!user) {
+                alert("Please login to add products to your cart!");
+                window.location.href = "login.html";
+                return;
+            }
+
+            const btn = event.currentTarget;
+            const original = btn.innerHTML;
+
+            try {
+                const response = await fetch(`http://localhost:8080/api/cart/add/${productId}?quantity=1`, {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': 'Basic ' + btoa(user.email + ":" + user.password), 
+                        'Content-Type': 'application/json'
+                    }
+                });
+
+                if (response.ok) {
+                    const cartKey = getCartKey();
+                    let cart = JSON.parse(localStorage.getItem(cartKey)) || [];
+                    const existingItem = cart.find(item => item.id === productId);
+                    if (existingItem) existingItem.quantity += 1;
+                    else cart.push({ id: productId, name: productName, price: productPrice, image_url: productImg, quantity: 1 });
+                    
+                    localStorage.setItem(cartKey, JSON.stringify(cart));
+                    updateNavbar(); 
+                    btn.innerHTML = "Added!";
+                    setTimeout(() => btn.innerHTML = original, 800);
+                }
+            } catch (error) { console.error(error); }
+        }
+
+        window.onload = () => { updateNavbar(); loadProducts(); };
+    </script>
+</body>
+</html>

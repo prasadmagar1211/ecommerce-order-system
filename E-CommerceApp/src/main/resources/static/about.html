@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About | Prasad Magar</title>
+<link
+	href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap"
+	rel="stylesheet">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+:root {
+	--primary: #2563eb;
+	--primary-light: #60a5fa;
+	--primary-soft: #eff6ff;
+	--accent: #f472b6;
+	--black: #0f172a;
+	--white: #ffffff;
+	--gray-100: #f1f5f9;
+	--gray-200: #e2e8f0;
+	--gray-500: #64748b;
+	--gradient-bg: linear-gradient(135deg, #f0f4ff 0%, #ffffff 50%, #fff1f2 100%);
+	--transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+body {
+	background: var(--gradient-bg);
+	background-attachment: fixed;
+	color: var(--black);
+	line-height: 1.6;
+	padding-top: 65px;
+}
+
+.container {
+	max-width: 1200px;
+	margin: 0 auto;
+	padding: 0 40px;
+}
+
+/* --- NAVBAR (65px) --- */
+.navbar {
+	height: 65px;
+	display: flex;
+	align-items: center;
+	background: rgba(255, 255, 255, 0.85);
+	backdrop-filter: blur(20px);
+	border-bottom: 1px solid rgba(37, 99, 235, 0.1);
+	position: fixed;
+	top: 0;
+	width: 100%;
+	z-index: 1000;
+}
+
+.nav-container {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	width: 100%;
+	max-width: 1400px;
+	margin: 0 auto;
+	padding: 0 40px;
+}
+
+.logo {
+	font-weight: 800;
+	font-size: 1.4rem;
+	text-decoration: none;
+	color: var(--black);
+	letter-spacing: -1px;
+}
+
+.logo span {
+	color: var(--primary);
+}
+
+.nav-menu a {
+	margin-left: 30px;
+	text-decoration: none;
+	color: var(--black);
+	font-weight: 700;
+	font-size: 0.9rem;
+}
+
+/* --- HERO SECTION --- */
+.hero {
+	padding: 80px 0 40px;
+}
+
+.hero-flex {
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-end;
+	flex-wrap: wrap;
+	gap: 30px;
+}
+
+.eyebrow {
+	color: var(--primary);
+	font-weight: 800;
+	text-transform: uppercase;
+	letter-spacing: 3px;
+	font-size: 0.8rem;
+	margin-bottom: 15px;
+	display: block;
+}
+
+.name-heading {
+	font-size: clamp(3rem, 8vw, 5rem);
+	font-weight: 800;
+	line-height: 1.1;
+	letter-spacing: -2px;
+	margin-bottom: 20px;
+}
+
+.contact-pill-box {
+	display: flex;
+	gap: 15px;
+	flex-wrap: wrap;
+	margin-bottom: 30px;
+}
+
+.contact-pill {
+	padding: 8px 16px;
+	background: white;
+	border: 1px solid var(--gray-200);
+	border-radius: 50px;
+	font-size: 0.85rem;
+	font-weight: 700;
+	color: var(--gray-500);
+	display: flex;
+	align-items: center;
+	gap: 8px;
+}
+
+.bio-text {
+	font-size: 1.25rem;
+	color: var(--gray-500);
+	max-width: 850px;
+	margin-bottom: 40px;
+}
+
+/* --- SECTION HEADERS --- */
+.section-title {
+	font-size: 1.8rem;
+	font-weight: 800;
+	margin: 60px 0 30px;
+	display: flex;
+	align-items: center;
+	gap: 15px;
+}
+
+.section-title::after {
+	content: '';
+	height: 1px;
+	flex: 1;
+	background: var(--gray-200);
+}
+
+/* --- SKILLS GRID --- */
+.skills-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+	gap: 25px;
+}
+
+.skill-card {
+	background: white;
+	padding: 30px;
+	border-radius: 24px;
+	border: 1px solid var(--gray-200);
+	transition: var(--transition);
+}
+
+.skill-card:hover {
+	transform: translateY(-5px);
+	border-color: var(--primary-light);
+	box-shadow: 0 15px 30px rgba(0, 0, 0, 0.05);
+}
+
+.skill-card h4 {
+	margin-bottom: 20px;
+	font-size: 1.1rem;
+	display: flex;
+	align-items: center;
+	gap: 12px;
+}
+
+.tag-cloud {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 10px;
+}
+
+.tag {
+	background: var(--gray-100);
+	color: var(--black);
+	padding: 6px 14px;
+	border-radius: 8px;
+	font-size: 0.8rem;
+	font-weight: 700;
+}
+
+/* --- EXPERIENCE & EDUCATION --- */
+.experience-item {
+	background: rgba(255, 255, 255, 0.4);
+	border-left: 4px solid var(--primary);
+	padding: 30px;
+	border-radius: 0 24px 24px 0;
+	margin-bottom: 25px;
+}
+
+.item-header {
+	display: flex;
+	justify-content: space-between;
+	margin-bottom: 10px;
+	flex-wrap: wrap;
+}
+
+.item-title {
+	font-weight: 800;
+	font-size: 1.3rem;
+}
+
+.item-date {
+	font-weight: 800;
+	color: var(--primary);
+	font-size: 0.9rem;
+}
+
+.item-sub {
+	display: block;
+	font-weight: 700;
+	color: var(--gray-500);
+	margin-bottom: 15px;
+}
+
+.item-list {
+	list-style: none;
+}
+
+.item-list li {
+	margin-bottom: 10px;
+	padding-left: 20px;
+	position: relative;
+	font-size: 0.95rem;
+}
+
+.item-list li::before {
+	content: '→';
+	position: absolute;
+	left: 0;
+	color: var(--primary);
+	font-weight: 800;
+}
+
+/* --- FOOTER --- */
+.footer-premium {
+	background: var(--black);
+	color: var(--white);
+	padding: 60px 0;
+	text-align: center;
+	margin-top: 100px;
+}
+
+.social-links a {
+	color: white;
+	font-size: 1.6rem;
+	margin: 0 15px;
+	transition: 0.3s;
+	display: inline-block;
+}
+
+.social-links a:hover {
+	color: var(--primary-light);
+	transform: translateY(-3px);
+}
+</style>
+</head>
+<body>
+
+	<header class="navbar">
+		<div class="nav-container">
+			<a href="index.html" class="logo">RAPID<span>STORE</span></a>
+			<nav class="nav-menu">
+				<a href="index.html">Home</a> <a href="products.html">Shop All</a> <a
+					href="about.html" style="color: var(--primary)">Portfolio</a>
+			</nav>
+			<div class="nav-icons">
+				<a href="cart.html" style="text-decoration: none; color: inherit;">
+					<i class="fa-solid fa-bag-shopping"></i>
+				</a>
+			</div>
+		</div>
+	</header>
+
+	<section class="hero">
+		<div class="container">
+			<span class="eyebrow">Java Developer & Systems Architect</span>
+			<h1 class="name-heading">Prasad Magar.</h1>
+
+			<div class="contact-pill-box">
+				<div class="contact-pill">
+					<i class="fa-solid fa-location-dot"></i> Kolhapur, MH
+				</div>
+				<div class="contact-pill">
+					<i class="fa-solid fa-phone"></i> +91 7666909062
+				</div>
+				<div class="contact-pill">
+					<i class="fa-solid fa-envelope"></i> prasadmagar0938@gmail.com
+				</div>
+			</div>
+
+			<p class="bio-text">
+				Performance-driven Developer with hands-on experience in building
+				scalable backend systems. I specialize in <strong>Spring
+					Boot</strong> and <strong>MySQL optimization</strong>, having successfully
+				reduced data retrieval times by 30% in enterprise-level
+				environments.
+			</p>
+		</div>
+	</section>
+
+	<div class="container">
+		<h3 class="section-title">Technical Proficiency</h3>
+		<div class="skills-grid">
+			<div class="skill-card">
+				<h4>
+					<i class="fa-solid fa-layer-group" style="color: #e4405f"></i>
+					Backend Frameworks
+				</h4>
+				<div class="tag-cloud">
+					<span class="tag">Spring Boot</span> <span class="tag">Spring
+						Framework</span> <span class="tag">Hibernate</span> <span class="tag">JPA</span>
+					<span class="tag">REST APIs</span>
+				</div>
+			</div>
+			<div class="skill-card">
+				<h4>
+					<i class="fa-solid fa-code" style="color: #2563eb"></i> Languages
+				</h4>
+				<div class="tag-cloud">
+					<span class="tag">Java (Core & Adv)</span> <span class="tag">Java
+						8</span> <span class="tag">C++</span> <span class="tag">JavaScript</span>
+					<span class="tag">SQL</span>
+				</div>
+			</div>
+			<div class="skill-card">
+				<h4>
+					<i class="fa-solid fa-database" style="color: #f29111"></i>
+					Database & Tools
+				</h4>
+				<div class="tag-cloud">
+					<span class="tag">MySQL (Advanced)</span> <span class="tag">Postman</span>
+					<span class="tag">Maven</span> <span class="tag">IntelliJ
+						IDEA</span> <span class="tag">Git</span>
+				</div>
+			</div>
+		</div>
+
+		<h3 class="section-title">Professional Experience</h3>
+		<div class="experience-item">
+			<div class="item-header">
+				<span class="item-title">Java Developer Intern</span> <span
+					class="item-date">JAN 2024 — JULY 2024</span>
+			</div>
+			<span class="item-sub">QualTech Technologies, Kolhapur</span>
+			<ul class="item-list">
+				<li>Architected and deployed 5+ RESTful APIs using Spring Boot
+					for enterprise-level applications.</li>
+				<li><strong>Optimized MySQL queries</strong> and Hibernate
+					mappings, resulting in a <strong>30% reduction</strong> in data
+					retrieval time.</li>
+				<li>Integrated backend services with relational databases to
+					ensure secure and efficient data storage.</li>
+				<li>Collaborated within a 5-member Agile team to deliver
+					functional modules ahead of schedule.</li>
+			</ul>
+		</div>
+
+		<h3 class="section-title">Education</h3>
+		<div class="experience-item" style="border-left-color: var(--accent);">
+			<div class="item-header">
+				<span class="item-title">B.Tech in Computer Science</span> <span
+					class="item-date">2021 — 2024</span>
+			</div>
+			<span class="item-sub">Dr. D Y Patil College of Engineering,
+				Kolhapur</span>
+			<p style="font-weight: 700; color: var(--primary);">*A Grade
+				Recipient</p>
+		</div>
+
+		<h3 class="section-title">Key Projects</h3>
+		<div class="skills-grid">
+			<div class="skill-card">
+				<span class="item-date">SPRING BOOT / MYSQL</span>
+				<h4 style="margin-top: 10px;">Shopping App Backend</h4>
+				<p
+					style="font-size: 0.9rem; color: var(--gray-500); margin-bottom: 15px;">Built
+					secure modules for user authentication, cart management, and order
+					processing with 8+ JWT-protected REST APIs.</p>
+				<a href="products.html"
+					style="color: var(--primary); font-weight: 800; text-decoration: none; font-size: 0.8rem;">EXPLORE
+					COMPONENT →</a>
+			</div>
+			<div class="skill-card">
+				<span class="item-date">REACT.JS / FIREBASE</span>
+				<h4 style="margin-top: 10px;">Travel Advisor Web App</h4>
+				<p
+					style="font-size: 0.9rem; color: var(--gray-500); margin-bottom: 15px;">Designed
+					a responsive travel app integrating real-time APIs. Optimized
+					Firebase queries to reduce load time by 10 seconds.</p>
+				<a href="#"
+					style="color: var(--primary); font-weight: 800; text-decoration: none; font-size: 0.8rem;">VIEW
+					ON GITHUB →</a>
+			</div>
+		</div>
+	</div>
+
+	<footer class="footer-premium">
+		<div class="social-links">
+			<a href="https://github.com/prasadmagar1211"><i
+				class="fa-brands fa-github"></i></a> <a
+				href="https://www.linkedin.com/in/prasad-magar-53a443258/"><i
+				class="fa-brands fa-linkedin"></i></a>
+		</div>
+		<p
+			style="margin-top: 20px; opacity: 0.6; font-size: 0.8rem; letter-spacing: 1px;">&copy;
+			2025 PRASAD MAGAR | ENGINEERED IN PUNE, MH</p>
+	</footer>
+
+	<script>
+        function updateBadge() {
+            let cart = JSON.parse(localStorage.getItem('rapidCart')) || [];
+            // Simplified badge update for about page
+        }
+        window.onload = updateBadge;
+    </script>
+</body>
+</html>

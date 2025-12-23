@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Orders | RapidStore</title>
+<link
+	href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap"
+	rel="stylesheet">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+:root {
+	--primary: #2563eb;
+	--primary-soft: #eff6ff;
+	--black: #0f172a;
+	--white: #ffffff;
+	--gray-100: #f8fafc;
+	--gray-200: #e2e8f0;
+	--gray-500: #64748b;
+	--success: #10b981;
+	--transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+body {
+	background-color: var(--gray-100);
+	padding-top: 80px;
+}
+
+/* Navbar Styles */
+.navbar {
+	height: 65px;
+	display: flex;
+	align-items: center;
+	background: rgba(255, 255, 255, 0.95);
+	backdrop-filter: blur(10px);
+	border-bottom: 1px solid var(--gray-200);
+	position: fixed;
+	top: 0;
+	width: 100%;
+	z-index: 1000;
+}
+
+.nav-container {
+	max-width: 1400px;
+	margin: 0 auto;
+	padding: 0 40px;
+	display: flex;
+	align-items: center;
+	width: 100%;
+	justify-content: space-between;
+}
+
+.logo {
+	font-weight: 800;
+	font-size: 1.4rem;
+	text-decoration: none;
+	color: var(--black);
+}
+
+.logo span {
+	color: var(--primary);
+}
+
+.nav-links {
+	display: flex;
+	gap: 40px;
+}
+
+.nav-links a {
+	text-decoration: none;
+	color: var(--black);
+	font-weight: 700;
+	font-size: 0.9rem;
+}
+
+.container {
+	max-width: 900px;
+	margin: 40px auto;
+	padding: 0 20px;
+}
+
+.page-title {
+	font-size: 2.2rem;
+	font-weight: 800;
+	margin-bottom: 30px;
+	color: var(--black);
+}
+
+/* Enhanced Order Cards */
+.order-card {
+	background: var(--white);
+	border: 1px solid var(--gray-200);
+	padding: 24px;
+	border-radius: 24px;
+	margin-bottom: 20px;
+	display: flex;
+	gap: 25px;
+	align-items: center;
+	transition: var(--transition);
+}
+
+.order-card:hover {
+	transform: translateY(-4px);
+	box-shadow: 0 12px 24px rgba(0, 0, 0, 0.06);
+}
+
+.product-img {
+	width: 120px;
+	height: 120px;
+	object-fit: cover;
+	border-radius: 16px;
+	background: var(--gray-100);
+	border: 1px solid var(--gray-200);
+}
+
+.order-main-content {
+	flex: 1;
+}
+
+.product-name {
+	font-size: 1.25rem;
+	font-weight: 800;
+	color: var(--black);
+	margin-bottom: 6px;
+}
+
+.badge-row {
+	display: flex;
+	gap: 10px;
+	margin-bottom: 12px;
+}
+
+.quantity-badge {
+	background: var(--primary-soft);
+	color: var(--primary);
+	padding: 4px 12px;
+	border-radius: 8px;
+	font-size: 0.85rem;
+	font-weight: 700;
+}
+
+.status-badge {
+	background: #ecfdf5;
+	color: var(--success);
+	padding: 4px 12px;
+	border-radius: 8px;
+	font-size: 0.85rem;
+	font-weight: 700;
+	text-transform: uppercase;
+}
+
+.address-info {
+	display: flex;
+	align-items: flex-start;
+	gap: 8px;
+	color: var(--gray-500);
+	font-size: 0.85rem;
+	line-height: 1.4;
+}
+
+.address-info i {
+	margin-top: 3px;
+	color: var(--primary);
+}
+
+.order-right {
+	text-align: right;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+
+.order-total {
+	font-size: 1.5rem;
+	font-weight: 800;
+	color: var(--black);
+}
+
+.order-date {
+	font-size: 0.8rem;
+	color: var(--gray-500);
+	margin-top: 4px;
+}
+
+.empty-state {
+	text-align: center;
+	padding: 80px 0;
+}
+
+.empty-state i {
+	font-size: 4rem;
+	color: var(--gray-200);
+	margin-bottom: 20px;
+}
+</style>
+</head>
+<body>
+
+	<header class="navbar">
+		<div class="nav-container">
+			<a href="index.html" class="logo">RAPID<span>STORE</span></a>
+			<nav class="nav-links">
+				<a href="index.html">Home</a> <a href="products.html">Shop All</a> <a
+					href="orders.html" style="color: var(--primary)">My Orders</a>
+			</nav>
+			<div id="userArea"></div>
+		</div>
+	</header>
+
+	<div class="container">
+		<h1 class="page-title">My Orders</h1>
+		<div id="orders-list"></div>
+	</div>
+
+	<script>
+        const user = JSON.parse(localStorage.getItem('rapidUser'));
+        if (!user) {
+            window.location.href = 'login.html';
+        }
+
+        async function fetchMyOrders() {
+            const container = document.getElementById('orders-list');
+
+            try {
+                const response = await fetch(`http://localhost:8080/api/orders/user/${user.id}`);
+                let orders = await response.json();
+
+                if (!orders || orders.length === 0) {
+                    container.innerHTML = `
+                        <div class="empty-state">
+                            <i class="fa-solid fa-box-open"></i>
+                            <h2>No orders found</h2>
+                            <p>You haven't placed any orders yet.</p>
+                            <br>
+                            <a href="products.html" style="color: var(--primary); font-weight: 800; text-decoration:none;">Start Shopping &rarr;</a>
+                        </div>`;
+                    return;
+                }
+
+                // Sorting: Newest first (highest ID first)
+                orders.sort((a, b) => b.id - a.id);
+
+                container.innerHTML = orders.map(o => `
+                    <div class="order-card">
+                        <img src="${o.productImage || 'https://via.placeholder.com/150'}" 
+                             alt="${o.productName}" 
+                             class="product-img"
+                             onerror="this.src='https://via.placeholder.com/150?text=No+Image'">
+                        
+                        <div class="order-main-content">
+                            <h3 class="product-name">${o.productName || 'Order #' + o.id}</h3>
+                            
+                            <div class="badge-row">
+                                <span class="quantity-badge">Qty: ${o.quantity || 1}</span>
+                                <span class="status-badge">${o.status || 'PENDING'}</span>
+                            </div>
+                            
+                            <div class="address-info">
+                                <i class="fa-solid fa-location-dot"></i>
+                                <span>${o.address || 'Standard Delivery Address'}</span>
+                            </div>
+                        </div>
+
+                        <div class="order-right">
+                            <div class="order-total">$${o.totalAmount ? parseFloat(o.totalAmount).toFixed(2) : '0.00'}</div>
+                            <div class="order-date">Placed on ${new Date(o.orderDate).toLocaleDateString('en-US', { day: 'numeric', month: 'short', year: 'numeric' })}</div>
+                        </div>
+                    </div>
+                `).join('');
+
+            } catch (error) {
+                console.error("Fetch Error:", error);
+                container.innerHTML = "<p style='text-align:center; padding: 40px; color: var(--gray-500);'>Unable to load orders. Please try again later.</p>";
+            }
+        }
+
+        function setupHeader() {
+            if(user && user.fullName) {
+                document.getElementById('userArea').innerHTML = `
+                    <div style="display:flex; align-items:center; gap:12px; background:var(--primary-soft); padding:8px 15px; border-radius:12px;">
+                        <span style="font-weight:800; color:var(--primary); font-size:0.85rem;">Hi, ${user.fullName.split(' ')[0]}</span>
+                    </div>`;
+            }
+        }
+
+        window.onload = () => { 
+            setupHeader();
+            fetchMyOrders();
+        };
+    </script>
+</body>
+</html>

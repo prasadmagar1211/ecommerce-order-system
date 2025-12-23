@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Create Account | RapidStore</title>
+<link
+	href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap"
+	rel="stylesheet">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+:root {
+	--primary: #2563eb;
+	--primary-soft: #eff6ff;
+	--black: #0f172a;
+	--white: #ffffff;
+	--gray-100: #f8fafc;
+	--gray-200: #e2e8f0;
+	--gray-500: #64748b;
+	--success: #10b981;
+	--transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+body {
+	background-color: var(--white);
+	overflow: hidden;
+}
+
+.auth-wrapper {
+	display: grid;
+	grid-template-columns: 0.8fr 1.2fr; /* Flipped for Signup */
+	min-height: 100vh;
+}
+
+/* Modern Side Banner */
+.auth-banner {
+	background: linear-gradient(rgba(15, 23, 42, 0.4), rgba(15, 23, 42, 0.4)),
+		url('https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?q=80&w=2070');
+	background-size: cover;
+	background-position: center;
+	display: flex;
+	align-items: center;
+	padding: 60px;
+	color: white;
+}
+
+.banner-content h1 {
+	font-size: 3.5rem;
+	font-weight: 800;
+	line-height: 1;
+	margin-bottom: 24px;
+	letter-spacing: -2px;
+}
+
+/* Signup Form Container */
+.auth-form-container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 40px;
+	background: var(--white);
+	position: relative;
+}
+
+.auth-form {
+	width: 100%;
+	max-width: 480px;
+}
+
+.logo {
+	font-weight: 800;
+	font-size: 1.6rem;
+	text-decoration: none;
+	color: var(--black);
+	margin-bottom: 30px;
+	display: block;
+}
+
+.logo span {
+	color: var(--primary);
+}
+
+h2 {
+	font-size: 2.2rem;
+	font-weight: 800;
+	margin-bottom: 12px;
+	letter-spacing: -1px;
+}
+
+.subtitle {
+	color: var(--gray-500);
+	margin-bottom: 30px;
+}
+
+/* Inputs */
+.input-row {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 20px;
+}
+
+.input-group {
+	margin-bottom: 20px;
+}
+
+.input-group label {
+	display: block;
+	font-weight: 700;
+	font-size: 0.85rem;
+	margin-bottom: 8px;
+	color: var(--black);
+}
+
+.input-wrapper {
+	position: relative;
+}
+
+.input-wrapper i {
+	position: absolute;
+	left: 16px;
+	top: 50%;
+	transform: translateY(-50%);
+	color: var(--gray-500);
+	font-size: 0.9rem;
+}
+
+.input-group input {
+	width: 100%;
+	padding: 14px 14px 14px 44px;
+	border-radius: 12px;
+	border: 2px solid var(--gray-100);
+	background: var(--gray-100);
+	outline: none;
+	font-weight: 600;
+	transition: var(--transition);
+}
+
+.input-group input:focus {
+	border-color: var(--primary);
+	background: var(--white);
+}
+
+/* Button */
+.btn-signup {
+	width: 100%;
+	background: var(--black);
+	color: var(--white);
+	padding: 16px;
+	border: none;
+	border-radius: 12px;
+	font-weight: 800;
+	font-size: 1rem;
+	cursor: pointer;
+	transition: var(--transition);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 10px;
+	margin-top: 10px;
+}
+
+.btn-signup:hover {
+	transform: translateY(-3px);
+	box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+}
+
+/* --- SUCCESS OVERLAY --- */
+.success-overlay {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: var(--white);
+	display: none;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	z-index: 100;
+	text-align: center;
+	padding: 40px;
+	animation: fadeIn 0.5s ease forwards;
+}
+
+@
+keyframes fadeIn {from { opacity:0;
+	
+}
+
+to {
+	opacity: 1;
+}
+
+}
+.success-icon {
+	width: 80px;
+	height: 80px;
+	background: #ecfdf5;
+	color: var(--success);
+	border-radius: 50%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 2.5rem;
+	margin-bottom: 24px;
+}
+
+.auth-footer {
+	margin-top: 30px;
+	text-align: center;
+	font-size: 0.9rem;
+	color: var(--gray-500);
+}
+
+.auth-footer a {
+	color: var(--primary);
+	text-decoration: none;
+	font-weight: 800;
+}
+
+@media ( max-width : 1000px) {
+	.auth-banner {
+		display: none;
+	}
+	.auth-wrapper {
+		grid-template-columns: 1fr;
+	}
+}
+</style>
+</head>
+<body>
+
+	<div class="auth-wrapper">
+		<div class="auth-banner">
+			<div class="banner-content">
+				<span
+					style="text-transform: uppercase; letter-spacing: 4px; font-weight: 800; font-size: 0.8rem; margin-bottom: 20px; display: block;">Join
+					RapidStore</span>
+				<h1>
+					The Elite <br>Choice.
+				</h1>
+				<p>Create an account to unlock faster checkouts, exclusive 2025
+					drops, and premium membership perks.</p>
+			</div>
+		</div>
+
+		<div class="auth-form-container">
+			<div class="success-overlay" id="successState">
+				<div class="success-icon">
+					<i class="fa-solid fa-check"></i>
+				</div>
+				<h2 style="margin-bottom: 10px;">Welcome to the Club!</h2>
+				<p style="color: var(--gray-500); margin-bottom: 30px;">Your
+					account has been created successfully.</p>
+				<p style="font-weight: 700; color: var(--primary);">Redirecting
+					you to login...</p>
+			</div>
+
+			<div class="auth-form" id="signupFormContent">
+				<a href="index.html" class="logo">RAPID<span>STORE</span></a>
+				<h2>Create Account</h2>
+				<p class="subtitle">Join thousands of premium shoppers.</p>
+
+				<form id="signupForm">
+					<div class="input-row">
+						<div class="input-group">
+							<label>First Name</label>
+							<div class="input-wrapper">
+								<i class="fa-solid fa-user"></i> <input type="text"
+									id="firstName" placeholder="Steve" required>
+							</div>
+						</div>
+						<div class="input-group">
+							<label>Last Name</label>
+							<div class="input-wrapper">
+								<i class="fa-solid fa-user-tag"></i> <input type="text"
+									id="lastName" placeholder="Harrington" required>
+							</div>
+						</div>
+					</div>
+
+					<div class="input-group">
+						<label>Email Address</label>
+						<div class="input-wrapper">
+							<i class="fa-solid fa-envelope"></i> <input type="email"
+								id="email" placeholder="name@example.com" required>
+						</div>
+					</div>
+
+					<div class="input-group">
+						<label>Shipping Address</label>
+						<div class="input-wrapper">
+							<i class="fa-solid fa-location-dot"></i> <input type="text"
+								id="address" placeholder="123 Rapid Lane, City" required>
+						</div>
+					</div>
+
+					<div class="input-group">
+						<label>Password</label>
+						<div class="input-wrapper">
+							<i class="fa-solid fa-shield-halved"></i> <input type="password"
+								id="password" placeholder="Min. 8 characters" required
+								minlength="8">
+						</div>
+					</div>
+
+					<button type="submit" class="btn-signup" id="submitBtn">
+						<span>Create Account</span> <i class="fa-solid fa-arrow-right"></i>
+					</button>
+				</form>
+
+				<div class="auth-footer">
+					Already a member? <a href="login.html">Sign In</a>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script>
+    document.getElementById('signupForm').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const submitBtn = document.getElementById('submitBtn');
+        const originalBtnText = submitBtn.innerHTML;
+        
+        // UI Loading
+        submitBtn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> Processing...';
+        submitBtn.disabled = true;
+
+        const userData = {
+            fullName: document.getElementById('firstName').value + " " + document.getElementById('lastName').value,
+            email: document.getElementById('email').value,
+            password: document.getElementById('password').value,
+            address: document.getElementById('address').value 
+        };
+
+        try {
+            const res = await fetch('http://localhost:8080/api/auth/signup', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(userData)
+            });
+
+            if (res.ok) {
+                // Show Success State instead of popup
+                document.getElementById('signupFormContent').style.display = 'none';
+                document.getElementById('successState').style.display = 'flex';
+                
+                // Wait 2 seconds then redirect smoothly
+                setTimeout(() => {
+                    window.location.href = "login.html";
+                }, 2200);
+            } else {
+                alert("Something went wrong. Email might already be in use.");
+                submitBtn.innerHTML = originalBtnText;
+                submitBtn.disabled = false;
+            }
+        } catch (err) {
+            console.error(err);
+            alert("Could not connect to server.");
+            submitBtn.innerHTML = originalBtnText;
+            submitBtn.disabled = false;
+        }
+    });
+    </script>
+</body>
+</html>

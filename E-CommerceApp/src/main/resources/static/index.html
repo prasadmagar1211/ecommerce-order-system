@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RapidStore | Premium Essentials</title>
+<link
+	href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap"
+	rel="stylesheet">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<style>
+:root {
+	--primary: #2563eb;
+	--primary-soft: #eff6ff;
+	--black: #0f172a;
+	--white: #ffffff;
+	--gray-100: #f8fafc;
+	--gray-200: #e2e8f0;
+	--gray-500: #64748b;
+	--transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+body {
+	background-color: var(--white);
+	padding-top: 65px;
+	cursor: default;
+}
+
+/* --- SLIM MODERN NAVBAR (65px) --- */
+.navbar {
+	height: 65px;
+	display: flex;
+	align-items: center;
+	background: rgba(255, 255, 255, 0.95);
+	backdrop-filter: blur(10px);
+	border-bottom: 1px solid var(--gray-200);
+	position: fixed;
+	top: 0;
+	width: 100%;
+	z-index: 1000;
+}
+
+.nav-container {
+	max-width: 1400px;
+	margin: 0 auto;
+	padding: 0 40px;
+	display: flex;
+	align-items: center;
+	width: 100%;
+	justify-content: space-between;
+}
+
+.logo {
+	font-weight: 800;
+	font-size: 1.4rem;
+	text-decoration: none;
+	color: var(--black);
+	cursor: pointer;
+}
+
+.logo span {
+	color: var(--primary);
+}
+
+.nav-links {
+	display: flex;
+	gap: 40px;
+	align-items: center;
+}
+
+.nav-links a {
+	text-decoration: none;
+	color: var(--black);
+	font-weight: 700;
+	font-size: 0.9rem;
+	transition: var(--transition);
+	position: relative;
+}
+
+.nav-links a:hover {
+	color: var(--primary);
+}
+
+/* MODERN AUTH SECTION */
+.auth-group {
+	display: flex;
+	align-items: center;
+	gap: 15px;
+}
+
+.auth-btn {
+	padding: 8px 20px;
+	border-radius: 10px;
+	font-weight: 700;
+	font-size: 0.8rem;
+	text-decoration: none;
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	transition: var(--transition);
+}
+
+.login-trigger {
+	color: var(--black);
+	background: var(--gray-100);
+}
+
+.signup-trigger {
+	background: var(--black);
+	color: var(--white);
+}
+
+.auth-btn:hover {
+	transform: translateY(-2px);
+	filter: brightness(1.1);
+}
+
+.cart-trigger {
+	position: relative;
+	color: var(--black);
+	font-size: 1.3rem;
+	margin-right: 10px;
+}
+
+.badge {
+	position: absolute;
+	top: -6px;
+	right: -8px;
+	background: var(--primary);
+	color: white;
+	font-size: 9px;
+	width: 16px;
+	height: 16px;
+	border-radius: 50%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-weight: 800;
+	border: 2px solid white;
+}
+
+/* --- HERO SECTION --- */
+.hero {
+	height: calc(100vh - 65px);
+	display: flex;
+	align-items: center;
+	position: relative;
+	overflow: hidden;
+}
+
+.hero-bg {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	z-index: -2;
+}
+
+.hero-overlay {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: linear-gradient(to right, rgba(0, 0, 0, 0.75), transparent);
+	z-index: -1;
+}
+
+.container-wide {
+	max-width: 1400px;
+	margin: 0 auto;
+	padding: 0 40px;
+	width: 100%;
+}
+
+.hero-content {
+	color: white;
+	max-width: 650px;
+}
+
+.eyebrow {
+	text-transform: uppercase;
+	letter-spacing: 3px;
+	font-weight: 800;
+	font-size: 0.85rem;
+	display: block;
+	margin-bottom: 15px;
+}
+
+.display-title {
+	font-size: clamp(2.5rem, 5vw, 4.5rem);
+	font-weight: 800;
+	line-height: 1.1;
+	margin-bottom: 25px;
+}
+
+.btn {
+	display: inline-block;
+	padding: 18px 36px;
+	border-radius: 12px;
+	text-decoration: none;
+	font-weight: 700;
+	transition: var(--transition);
+	cursor: pointer;
+}
+
+.btn-primary {
+	background: var(--primary);
+	color: white;
+	border: none;
+}
+
+.btn-outline-white {
+	border: 2px solid white;
+	color: white;
+	background: transparent;
+	margin-left: 15px;
+}
+
+/* --- PRODUCT GRID --- */
+.section-padding {
+	padding: 120px 0;
+}
+
+.product-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+	gap: 40px;
+}
+
+.product-card {
+	background: white;
+	transition: var(--transition);
+}
+
+.img-wrapper {
+	position: relative;
+	aspect-ratio: 3/4;
+	background: var(--gray-100);
+	border-radius: 24px;
+	overflow: hidden;
+	margin-bottom: 20px;
+}
+
+.img-wrapper img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	transition: var(--transition);
+}
+
+.overlay-controls {
+	position: absolute;
+	bottom: -70px;
+	left: 0;
+	width: 100%;
+	display: flex;
+	transition: var(--transition);
+}
+
+.img-wrapper:hover .overlay-controls {
+	bottom: 0;
+}
+
+.img-wrapper:hover img {
+	transform: scale(1.05);
+}
+
+.action-btn {
+	flex: 1;
+	padding: 22px 10px;
+	border: none;
+	font-weight: 700;
+	cursor: pointer;
+	transition: 0.2s;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 8px;
+}
+
+.btn-add-cart {
+	background: var(--primary);
+	color: white;
+}
+
+.btn-buy-now {
+	background: var(--black);
+	color: white;
+}
+
+.product-info h3 {
+	font-size: 1.2rem;
+	margin-bottom: 8px;
+	font-weight: 600;
+}
+
+.price {
+	font-weight: 800;
+	color: var(--gray-500);
+	font-size: 1.1rem;
+}
+
+/* --- MODERN ORDER CARDS (UPGRADED) --- */
+.order-card-modern {
+	background: var(--white);
+	border: 1px solid var(--gray-200);
+	padding: 24px;
+	border-radius: 24px;
+	margin-bottom: 20px;
+	display: flex;
+	gap: 25px;
+	align-items: center;
+	transition: var(--transition);
+}
+
+.order-card-modern:hover {
+	transform: translateY(-4px);
+	box-shadow: 0 12px 24px rgba(0, 0, 0, 0.06);
+}
+
+.order-img-mini {
+	width: 100px;
+	height: 100px;
+	object-fit: cover;
+	border-radius: 16px;
+	background: var(--gray-100);
+}
+
+.order-info-flex {
+	flex: 1;
+}
+
+.order-badges {
+	display: flex;
+	gap: 10px;
+	margin-bottom: 10px;
+}
+
+.badge-qty {
+	background: var(--primary-soft);
+	color: var(--primary);
+	padding: 4px 12px;
+	border-radius: 8px;
+	font-size: 0.8rem;
+	font-weight: 700;
+}
+
+.badge-status {
+	background: #ecfdf5;
+	color: #10b981;
+	padding: 4px 12px;
+	border-radius: 8px;
+	font-size: 0.8rem;
+	font-weight: 700;
+	text-transform: uppercase;
+}
+
+/* --- CUSTOM MODAL POPUP --- */
+.modal-overlay {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(15, 23, 42, 0.6);
+	backdrop-filter: blur(4px);
+	display: none;
+	align-items: center;
+	justify-content: center;
+	z-index: 2000;
+}
+
+.modal-content {
+	background: white;
+	padding: 40px;
+	border-radius: 24px;
+	max-width: 400px;
+	width: 90%;
+	text-align: center;
+	box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+	transform: scale(0.9);
+	transition: var(--transition);
+}
+
+.modal-overlay.active {
+	display: flex;
+}
+
+.modal-overlay.active .modal-content {
+	transform: scale(1);
+}
+
+.modal-btns {
+	display: flex;
+	gap: 15px;
+	margin-top: 30px;
+}
+
+.modal-btn {
+	flex: 1;
+	padding: 14px;
+	border-radius: 12px;
+	border: none;
+	font-weight: 700;
+	cursor: pointer;
+	transition: 0.2s;
+}
+
+.btn-confirm {
+	background: #ef4444;
+	color: white;
+}
+
+.btn-cancel {
+	background: var(--gray-100);
+	color: var(--black);
+}
+
+/* --- FOOTER --- */
+.footer-premium {
+	background: var(--gray-100);
+	padding: 80px 0 40px;
+	border-top: 1px solid var(--gray-200);
+}
+
+.footer-top {
+	display: flex;
+	justify-content: space-between;
+	margin-bottom: 60px;
+	flex-wrap: wrap;
+	gap: 40px;
+}
+
+.footer-brand-column {
+	max-width: 400px;
+}
+
+.footer-brand-column p {
+	margin-top: 20px;
+	color: var(--gray-500);
+	line-height: 1.6;
+}
+
+.footer-nav-group {
+	display: flex;
+	gap: 80px;
+}
+
+.footer-col h4 {
+	margin-bottom: 25px;
+	font-weight: 800;
+	text-transform: uppercase;
+	font-size: 0.8rem;
+	letter-spacing: 1px;
+}
+
+.footer-col a {
+	display: block;
+	text-decoration: none;
+	color: var(--gray-500);
+	margin-bottom: 12px;
+	transition: 0.2s;
+}
+
+.footer-col a:hover {
+	color: var(--primary);
+}
+
+.footer-bottom {
+	border-top: 1px solid var(--gray-200);
+	padding-top: 40px;
+	text-align: center;
+	color: var(--gray-500);
+	font-size: 0.9rem;
+}
+</style>
+</head>
+<body>
+
+	<div class="modal-overlay" id="logoutModal">
+		<div class="modal-content">
+			<i class="fa-solid fa-circle-question"
+				style="font-size: 3rem; color: var(--primary); margin-bottom: 20px;"></i>
+			<h2 style="font-weight: 800; margin-bottom: 10px;">Confirm
+				Logout</h2>
+			<p style="color: var(--gray-500);">Are you sure you want to
+				logout?</p> 
+			<div class="modal-btns">
+				<button class="modal-btn btn-cancel" onclick="closeLogoutModal()">Cancel</button>
+				<button class="modal-btn btn-confirm" onclick="confirmLogout()">Yes,
+					Logout</button>
+			</div>
+		</div>
+	</div>
+
+	<header class="navbar">
+		<div class="nav-container">
+			<a href="index.html" class="logo">RAPID<span>STORE</span></a>
+
+			<nav class="nav-links" id="main-nav">
+				<a href="index.html" style="color: var(--primary)">Home</a> <a
+					href="products.html">Shop All</a> <a href="about.html">About Us</a>
+			</nav>
+
+			<div class="auth-group" id="userArea">
+				<a href="cart.html" class="cart-trigger"> <i
+					class="fa-solid fa-bag-shopping"></i> <span class="badge"
+					id="cart-count">0</span>
+				</a> <a href="login.html" class="auth-btn login-trigger"> Login </a> <a
+					href="signup.html" class="auth-btn signup-trigger"> Signup </a>
+			</div>
+		</div>
+	</header>
+
+	<section class="hero">
+		<div class="hero-overlay"></div>
+		<img
+			src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?q=80&w=2070"
+			class="hero-bg" alt="Hero">
+		<div class="container-wide">
+			<div class="hero-content">
+				<span class="eyebrow">Collection 2025</span>
+				<h1 class="display-title">
+					Quality That <br>Moves With You.
+				</h1>
+				<p
+					style="color: rgba(255, 255, 255, 0.8); margin-bottom: 40px; font-size: 1.2rem; line-height: 1.6;">Experience
+					the intersection of speed and premium design. Curated essentials
+					engineered by Prasad Magar.</p>
+				<div class="hero-btns">
+					<a href="products.html" class="btn btn-primary">Shop Collection</a>
+					<a href="about.html" class="btn btn-outline-white">The
+						Developer</a>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section class="section-padding">
+		<div class="container-wide">
+			<div
+				style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 60px;">
+				<div>
+					<span class="eyebrow" style="color: var(--primary);">The
+						Selection</span>
+					<h2 class="display-title"
+						style="font-size: 2.8rem; margin-top: 10px;">Featured Items</h2>
+				</div>
+				<a href="products.html"
+					style="text-decoration: none; color: var(--black); font-weight: 800; border-bottom: 2px solid var(--black); padding-bottom: 5px;">View
+					All &rarr;</a>
+			</div>
+			<div class="product-grid" id="featured-grid"></div>
+		</div>
+	</section>
+
+	<section id="my-orders-section" class="section-padding"
+		style="display: none; background: var(--gray-100);">
+		<div class="container-wide">
+			<div
+				style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 40px;">
+				<div>
+					<span class="eyebrow" style="color: var(--primary);">Your
+						History</span>
+					<h2 class="display-title"
+						style="font-size: 2.8rem; margin-top: 10px;">My Orders</h2>
+				</div>
+				<a href="orders.html"
+					style="text-decoration: none; color: var(--black); font-weight: 800; border-bottom: 2px solid var(--black); padding-bottom: 5px;">All
+					Orders &rarr;</a>
+			</div>
+			<div id="user-orders-display"></div>
+		</div>
+	</section>
+
+	<footer class="footer-premium">
+		<div class="container-wide">
+			<div class="footer-top">
+				<div class="footer-brand-column">
+					<h2 class="logo">
+						RAPID<span>STORE</span>
+					</h2>
+					<p>Redefining modern retail through industrial-grade code and
+						minimalist design aesthetics.</p>
+				</div>
+				<div class="footer-nav-group">
+					<div class="footer-col">
+						<h4>Shop</h4>
+						<a href="products.html">All Products</a> <a href="products.html">New
+							Arrivals</a>
+					</div>
+					<div class="footer-col">
+						<h4>Developer</h4>
+						<a href="about.html">About</a> <a href="contact.html">Contact</a>
+					</div>
+				</div>
+			</div>
+			<div class="footer-bottom">
+				<p>&copy; 2025 RapidStore. Engineered by Prasad Magar.</p>
+			</div>
+		</div>
+	</footer>
+
+	<script>
+        function getCartKey() {
+            const user = JSON.parse(localStorage.getItem('rapidUser'));
+            return user ? `rapidCart_${user.id}` : null;
+        }
+
+        async function loadFeaturedProducts() {
+            const grid = document.getElementById('featured-grid');
+            updateCartBadge();
+            try {
+                const response = await fetch('http://localhost:8080/api/products');
+                const products = await response.json();
+                grid.innerHTML = products.slice(0, 8).map(p => {
+                    const safeName = p.name.replace(/'/g, "\\'");
+                    return `
+                        <div class="product-card">
+                            <div class="img-wrapper">
+                                <img src="${p.imageUrl}" alt="${p.name}">
+                                <div class="overlay-controls">
+                                    <button class="action-btn btn-add-cart" onclick="addToCart(${p.id}, '${safeName}', ${p.price}, '${p.imageUrl}', event)">
+                                        <i class="fa-solid fa-cart-plus"></i> Add
+                                    </button>
+                                    <button class="action-btn btn-buy-now" onclick="window.location.href='product-details.html?id=${p.id}'">
+                                        <i class="fa-solid fa-bolt"></i> Buy
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="product-info">
+                                <h3>${p.name}</h3>
+                                <p class="price">$${p.price.toFixed(2)}</p>
+                            </div>
+                        </div>`;
+                }).join('');
+            } catch (e) { grid.innerHTML = "<p>Connect backend to view items.</p>"; }
+        }
+
+        // IMPROVED: Load My Orders with Product Details
+        async function loadMyOrders() {
+            const user = JSON.parse(localStorage.getItem('rapidUser'));
+            const orderContainer = document.getElementById('user-orders-display');
+            const section = document.getElementById('my-orders-section');
+            
+            if (!user || !user.id) return;
+
+            try {
+                const response = await fetch(`http://localhost:8080/api/orders/user/${user.id}`);
+                const orders = await response.json();
+
+                if(orders && orders.length > 0) {
+                    section.style.display = "block";
+                    // Sort newest first and show only top 3 on home page
+                    const latestOrders = orders.sort((a,b) => b.id - a.id).slice(0, 3);
+                    
+                    orderContainer.innerHTML = latestOrders.map(o => `
+                        <div class="order-card-modern">
+                            <img src="${o.productImage || 'https://via.placeholder.com/150'}" class="order-img-mini" alt="${o.productName}">
+                            <div class="order-info-flex">
+                                <h3 style="font-weight: 800; font-size: 1.15rem; margin-bottom: 5px;">${o.productName || 'RapidStore Item'}</h3>
+                                <div class="order-badges">
+                                    <span class="badge-qty">Qty: ${o.quantity || 1}</span>
+                                    <span class="badge-status">${o.status || 'PENDING'}</span>
+                                </div>
+                                <div style="color: var(--gray-500); font-size: 0.85rem; display: flex; align-items: center; gap: 6px;">
+                                    <i class="fa-solid fa-location-dot" style="color: var(--primary);"></i>
+                                    <span>${o.address || 'Standard Delivery Address'}</span>
+                                </div>
+                            </div>
+                            <div style="text-align: right;">
+                                <div style="font-size: 1.3rem; font-weight: 800;">$${o.totalAmount.toFixed(2)}</div>
+                                <div style="font-size: 0.75rem; color: var(--gray-500); margin-top: 5px;">${new Date(o.orderDate).toLocaleDateString()}</div>
+                            </div>
+                        </div>
+                    `).join('');
+                } else {
+                    section.style.display = "none";
+                }
+            } catch (error) {
+                console.error("Error loading history:", error);
+            }
+        }
+
+        async function addToCart(productId, productName, productPrice, productImg, event) {
+            const user = JSON.parse(localStorage.getItem('rapidUser'));
+            
+            if(!user) {
+                alert("Please login to add items to your cart!");
+                window.location.href = 'login.html';
+                return;
+            }
+
+            const btn = event.currentTarget;
+            const original = btn.innerHTML;
+
+            try {
+                const response = await fetch(`http://localhost:8080/api/cart/add/${productId}?quantity=1`, {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': 'Basic ' + btoa(user.email + ":" + user.password), 
+                        'Content-Type': 'application/json'
+                    }
+                });
+
+                if (response.ok) {
+                    const cartKey = getCartKey();
+                    let currentCart = JSON.parse(localStorage.getItem(cartKey)) || [];
+                    const existing = currentCart.find(item => item.id === productId);
+                    
+                    if(existing) existing.quantity += 1;
+                    else currentCart.push({ id: productId, name: productName, price: productPrice, image_url: productImg, quantity: 1 });
+                    
+                    localStorage.setItem(cartKey, JSON.stringify(currentCart));
+                    updateCartBadge();
+                    btn.innerHTML = "Added!";
+                    setTimeout(() => btn.innerHTML = original, 1000);
+                }
+            } catch (e) { console.error(e); }
+        }
+
+        function updateCartBadge() {
+            const badge = document.getElementById('cart-count');
+            const cartKey = getCartKey();
+            if(!cartKey) { if(badge) badge.style.display="none"; return; }
+
+            const currentCart = JSON.parse(localStorage.getItem(cartKey)) || [];
+            const total = currentCart.reduce((sum, item) => sum + item.quantity, 0);
+            if(badge) {
+                badge.innerText = total;
+                badge.style.display = total > 0 ? "flex" : "none";
+            }
+        }
+
+        function checkUser() {
+            const user = JSON.parse(localStorage.getItem('rapidUser'));
+            const userArea = document.getElementById('userArea');
+            if (user) {
+                const nav = document.getElementById('main-nav');
+                if(!document.getElementById('nav-orders-link')) { 
+                    const orderLink = document.createElement('a');
+                    orderLink.href = "orders.html"; 
+                    orderLink.id = "nav-orders-link";
+                    orderLink.innerText = "Orders";
+                    nav.insertBefore(orderLink, nav.children[2]);
+                }
+                userArea.innerHTML = `
+                    <a href="cart.html" class="cart-trigger">
+                        <i class="fa-solid fa-bag-shopping"></i>
+                        <span class="badge" id="cart-count">0</span>
+                    </a>
+                    <div style="display:flex; align-items:center; gap:12px; background:var(--primary-soft); padding:8px 15px; border-radius:12px;">
+                        <span style="font-weight:800; color:var(--primary); font-size:0.85rem;">Hi, ${user.fullName.split(' ')[0]}</span>
+                        <button onclick="openLogoutModal()" style="background:none; border:none; color:#ef4444; cursor:pointer;"><i class="fa-solid fa-power-off"></i></button>
+                    </div>`; 
+                loadMyOrders();
+            }
+            updateCartBadge();
+        }
+
+        // --- CUSTOM LOGOUT LOGIC ---
+        function openLogoutModal() {
+            document.getElementById('logoutModal').classList.add('active');
+        }
+
+        function closeLogoutModal() {
+            document.getElementById('logoutModal').classList.remove('active');
+        }
+
+        function confirmLogout() { 
+            localStorage.removeItem('rapidUser'); 
+            window.location.reload(); 
+        }
+
+        window.onload = () => { loadFeaturedProducts(); checkUser(); };
+    </script>
+</body>
+</html>

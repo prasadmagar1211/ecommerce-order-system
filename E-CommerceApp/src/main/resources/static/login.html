@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Login | RapidStore</title>
+<link
+	href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap"
+	rel="stylesheet">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+:root {
+	--primary: #2563eb;
+	--primary-soft: #eff6ff;
+	--black: #0f172a;
+	--white: #ffffff;
+	--gray-100: #f8fafc;
+	--gray-200: #e2e8f0;
+	--gray-500: #64748b;
+	--transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+body {
+	background-color: var(--white);
+	overflow: hidden;
+}
+
+.auth-wrapper {
+	display: grid;
+	grid-template-columns: 1.2fr 0.8fr;
+	min-height: 100vh;
+}
+
+/* Modern Left Banner */
+.auth-banner {
+	background: linear-gradient(rgba(15, 23, 42, 0.4), rgba(15, 23, 42, 0.4)),
+		url('https://images.unsplash.com/photo-1441986300917-64674bd600d8?q=80&w=2070');
+	background-size: cover;
+	background-position: center;
+	display: flex;
+	align-items: center;
+	padding: 80px;
+	color: white;
+	position: relative;
+}
+
+.banner-content {
+	position: relative;
+	z-index: 2;
+	max-width: 500px;
+}
+
+.banner-content h1 {
+	font-size: 4rem;
+	font-weight: 800;
+	line-height: 1;
+	margin-bottom: 24px;
+	letter-spacing: -2px;
+}
+
+.banner-content p {
+	font-size: 1.1rem;
+	color: rgba(255, 255, 255, 0.8);
+	line-height: 1.6;
+}
+
+/* Login Form Side */
+.auth-form-container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 60px;
+	background: var(--white);
+}
+
+.auth-form {
+	width: 100%;
+	max-width: 400px;
+}
+
+.logo {
+	font-weight: 800;
+	font-size: 1.6rem;
+	text-decoration: none;
+	color: var(--black);
+	margin-bottom: 40px;
+	display: block;
+}
+
+.logo span {
+	color: var(--primary);
+}
+
+h2 {
+	font-size: 2.2rem;
+	font-weight: 800;
+	margin-bottom: 12px;
+	color: var(--black);
+	letter-spacing: -1px;
+}
+
+.subtitle {
+	color: var(--gray-500);
+	margin-bottom: 40px;
+}
+
+/* Input Styling */
+.input-group {
+	margin-bottom: 24px;
+}
+
+.input-group label {
+	display: block;
+	font-weight: 700;
+	font-size: 0.85rem;
+	margin-bottom: 10px;
+	color: var(--black);
+}
+
+.input-wrapper {
+	position: relative;
+}
+
+.input-wrapper i {
+	position: absolute;
+	left: 16px;
+	top: 50%;
+	transform: translateY(-50%);
+	color: var(--gray-500);
+	font-size: 0.9rem;
+}
+
+.input-group input {
+	width: 100%;
+	padding: 16px 16px 16px 48px;
+	border-radius: 14px;
+	border: 2px solid var(--gray-100);
+	background: var(--gray-100);
+	outline: none;
+	font-weight: 600;
+	transition: var(--transition);
+}
+
+.input-group input:focus {
+	border-color: var(--primary);
+	background: var(--white);
+	box-shadow: 0 10px 20px rgba(37, 99, 235, 0.05);
+}
+
+/* Modern Button */
+.btn-login {
+	width: 100%;
+	background: var(--black);
+	color: var(--white);
+	padding: 18px;
+	border: none;
+	border-radius: 14px;
+	font-weight: 800;
+	font-size: 1rem;
+	cursor: pointer;
+	transition: var(--transition);
+	margin-top: 10px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 10px;
+}
+
+.btn-login:hover {
+	transform: translateY(-3px);
+	box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+}
+
+.btn-login:active {
+	transform: translateY(0);
+}
+
+.auth-footer {
+	margin-top: 40px;
+	text-align: center;
+	font-size: 0.95rem;
+	color: var(--gray-500);
+}
+
+.auth-footer a {
+	color: var(--primary);
+	text-decoration: none;
+	font-weight: 800;
+}
+
+.error-msg {
+	color: #ef4444;
+	background: #fef2f2;
+	padding: 12px;
+	border-radius: 10px;
+	font-size: 0.85rem;
+	font-weight: 700;
+	margin-bottom: 20px;
+	display: none;
+	text-align: center;
+}
+
+@media ( max-width : 1000px) {
+	.auth-banner {
+		display: none;
+	}
+	.auth-wrapper {
+		grid-template-columns: 1fr;
+	}
+}
+</style>
+</head>
+<body>
+	<div class="auth-wrapper">
+		<div class="auth-banner">
+			<div class="banner-content">
+				<span
+					style="text-transform: uppercase; letter-spacing: 4px; font-weight: 800; font-size: 0.8rem; margin-bottom: 20px; display: block;">RapidStore
+					Elite</span>
+				<h1>
+					The Wait <br>is Over.
+				</h1>
+				<p>Log in to access your personalized collection, track orders,
+					and experience the speed of RapidStore 2025.</p>
+			</div>
+		</div>
+
+		<div class="auth-form-container">
+			<div class="auth-form">
+				<a href="index.html" class="logo">RAPID<span>STORE</span></a>
+				<h2>Welcome Back</h2>
+				<p class="subtitle">Enter your credentials to manage your
+					orders.</p>
+
+				<div id="errorBox" class="error-msg">Incorrect email or
+					password.</div>
+
+				<form id="loginForm">
+					<div class="input-group">
+						<label>Email Address</label>
+						<div class="input-wrapper">
+							<i class="fa-solid fa-envelope"></i> <input type="email"
+								id="email" placeholder="name@company.com" required>
+						</div>
+					</div>
+					<div class="input-group">
+						<label>Password</label>
+						<div class="input-wrapper">
+							<i class="fa-solid fa-lock"></i> <input type="password"
+								id="password" placeholder="••••••••" required>
+						</div>
+					</div>
+					<button type="submit" class="btn-login" id="loginBtn">
+						Sign In <i class="fa-solid fa-arrow-right"></i>
+					</button>
+				</form>
+
+				<div class="auth-footer">
+					New to RapidStore? <a href="signup.html">Create Account</a>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script>
+    document.getElementById('loginForm').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const email = document.getElementById('email').value;
+        const password = document.getElementById('password').value;
+        const errorBox = document.getElementById('errorBox');
+        const loginBtn = document.getElementById('loginBtn');
+
+        // UI Loading State
+        loginBtn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> Signing in...';
+        loginBtn.disabled = true;
+        errorBox.style.display = "none";
+
+        try {
+            const res = await fetch('http://localhost:8080/api/auth/login', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email, password })
+            });
+
+            if (res.ok) {
+                const user = await res.json();
+                
+                // Keep password for Cart Auth header
+                user.password = password; 
+                
+                localStorage.setItem('rapidUser', JSON.stringify(user)); 
+                
+                // NO POPUP - Smooth redirect
+                window.location.href = "index.html";
+            } else {
+                errorBox.style.display = "block";
+                loginBtn.innerHTML = 'Sign In <i class="fa-solid fa-arrow-right"></i>';
+                loginBtn.disabled = false;
+            }
+        } catch (err) {
+            console.error(err);
+            errorBox.innerText = "Server connection failed.";
+            errorBox.style.display = "block";
+            loginBtn.innerHTML = 'Sign In <i class="fa-solid fa-arrow-right"></i>';
+            loginBtn.disabled = false;
+        }
+    });
+
+    // Check if user is already logged in
+    window.onload = () => {
+        const user = JSON.parse(localStorage.getItem('rapidUser'));
+        if (user) window.location.href = "index.html";
+    };
+    </script>
+</body>
+</html>
