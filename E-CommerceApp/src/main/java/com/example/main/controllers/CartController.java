@@ -1,10 +1,7 @@
 package com.example.main.controllers;
 
-import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,11 +24,6 @@ public class CartController {
 
 	@Autowired
 	private ProductRepository productRepository;
-
-	/**
-	 * Adds a product to the user's cart in the database. Accessible only by users
-	 * with the 'USER' role.
-	 */
 	
 	@PostMapping("/add/{productId}")
 	public ResponseEntity<String> addItemToCart(

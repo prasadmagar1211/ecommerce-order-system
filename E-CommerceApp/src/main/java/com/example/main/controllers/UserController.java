@@ -12,7 +12,7 @@ import com.example.main.repositories.UserRepository;
 import com.example.main.services.UserService;
 
 @RestController
-@RequestMapping("/api/users")
+@RequestMapping("/api/users") 
 public class UserController {
 
     private UserRepository userRepository;
