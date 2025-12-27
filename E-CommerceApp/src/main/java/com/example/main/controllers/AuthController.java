@@ -12,27 +12,27 @@ import java.util.Map;
 @CrossOrigin(origins = "*")
 public class AuthController {
 
-    @Autowired
-    private AuthService authService;
+	@Autowired
+	private AuthService authService;
 
-    @PostMapping("/signup")
-    public ResponseEntity<?> register(@RequestBody User user) {
-        try {
-            return ResponseEntity.ok(authService.signup(user));
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body("Error: Email already exists.");
-        }
-    }
+	@PostMapping("/signup")
+	public ResponseEntity<?> register(@RequestBody User user) {
+		try {
+			return ResponseEntity.ok(authService.signup(user));
+		} catch (Exception e) {
+			return ResponseEntity.badRequest().body("Error: Email already exists.");
+		}
+	}
 
-    @PostMapping("/login")
-    public ResponseEntity<?> authenticate(@RequestBody Map<String, String> body) {
-        try {
-            User user = authService.login(body.get("email"), body.get("password"));
-            // Return user object (excluding password for security)
-            user.setPassword(null); 
-            return ResponseEntity.ok(user);
-        } catch (Exception e) {
-            return ResponseEntity.status(401).body(e.getMessage());
-        }
-    }
+	@PostMapping("/login")
+	public ResponseEntity<?> authenticate(@RequestBody Map<String, String> body) {
+		try {
+			User user = authService.login(body.get("email"), body.get("password"));
+			// Return user object (excluding password for security)
+			user.setPassword(null);
+			return ResponseEntity.ok(user);
+		} catch (Exception e) {
+			return ResponseEntity.status(401).body(e.getMessage());
+		}
+	}
 }

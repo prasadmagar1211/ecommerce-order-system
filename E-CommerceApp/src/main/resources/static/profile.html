@@ -1,38 +1,86 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>My Profile | RapidStore</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        :root { --primary: #2563eb; --black: #0f172a; --gray: #64748b; }
-        body { font-family: 'Plus Jakarta Sans', sans-serif; background: #f8fafc; padding: 40px; }
-        .profile-container { max-width: 900px; margin: 0 auto; background: white; padding: 30px; border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.05); }
-        h2 { margin-bottom: 25px; font-weight: 800; letter-spacing: -1px; }
-        .order-table { width: 100%; border-collapse: collapse; margin-top: 20px; }
-        .order-table th { text-align: left; padding: 12px; border-bottom: 2px solid #f1f5f9; color: var(--gray); font-size: 0.85rem; }
-        .order-table td { padding: 15px 12px; border-bottom: 1px solid #f1f5f9; font-size: 0.9rem; }
-        .status-badge { padding: 4px 10px; border-radius: 6px; font-size: 0.75rem; font-weight: 700; background: #e0f2fe; color: #0369a1; }
-    </style>
+<meta charset="UTF-8">
+<title>My Profile | RapidStore</title>
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+:root {
+	--primary: #2563eb;
+	--black: #0f172a;
+	--gray: #64748b;
+}
+
+body {
+	font-family: 'Plus Jakarta Sans', sans-serif;
+	background: #f8fafc;
+	padding: 40px;
+}
+
+.profile-container {
+	max-width: 900px;
+	margin: 0 auto;
+	background: white;
+	padding: 30px;
+	border-radius: 16px;
+	box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+}
+
+h2 {
+	margin-bottom: 25px;
+	font-weight: 800;
+	letter-spacing: -1px;
+}
+
+.order-table {
+	width: 100%;
+	border-collapse: collapse;
+	margin-top: 20px;
+}
+
+.order-table th {
+	text-align: left;
+	padding: 12px;
+	border-bottom: 2px solid #f1f5f9;
+	color: var(--gray);
+	font-size: 0.85rem;
+}
+
+.order-table td {
+	padding: 15px 12px;
+	border-bottom: 1px solid #f1f5f9;
+	font-size: 0.9rem;
+}
+
+.status-badge {
+	padding: 4px 10px;
+	border-radius: 6px;
+	font-size: 0.75rem;
+	font-weight: 700;
+	background: #e0f2fe;
+	color: #0369a1;
+}
+</style>
 </head>
 <body>
-    <div class="profile-container">
-        <h2>My Order History</h2>
-        <table class="order-table">
-            <thead>
-                <tr>
-                    <th>Order ID</th>
-                    <th>Date</th>
-                    <th>Total Amount</th>
-                    <th>Status</th>
-                </tr>
-            </thead>
-            <tbody id="orderList">
-                </tbody>
-        </table>
-    </div>
+	<div class="profile-container">
+		<h2>My Order History</h2>
+		<table class="order-table">
+			<thead>
+				<tr>
+					<th>Order ID</th>
+					<th>Date</th>
+					<th>Total Amount</th>
+					<th>Status</th>
+				</tr>
+			</thead>
+			<tbody id="orderList">
+			</tbody>
+		</table>
+	</div>
 
-    <script>
+	<script>
         async function fetchMyOrders() {
             const user = JSON.parse(localStorage.getItem('rapidUser'));
             if (!user) { window.location.href = 'login.html'; return; }
