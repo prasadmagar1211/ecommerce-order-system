@@ -12,10 +12,10 @@ public class Product {
 	private String name;
 	private double price;
 	private String imageUrl;
-    private String category;
+	private String category;
 
 	public Product() {
-		
+
 	}
 
 	// Getters and Setters
@@ -50,12 +50,12 @@ public class Product {
 	public void setImageUrl(String imageUrl) {
 		this.imageUrl = imageUrl;
 	}
-	
-    public String getCategory() {
-        return category;
-    }
 
-    public void setCategory(String category) {
-        this.category = category;
-    }
+	public String getCategory() {
+		return category;
+	}
+
+	public void setCategory(String category) {
+		this.category = category;
+	}
 }
