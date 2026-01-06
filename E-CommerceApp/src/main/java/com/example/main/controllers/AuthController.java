@@ -29,7 +29,7 @@ public class AuthController {
 		try {
 			User user = authService.login(body.get("email"), body.get("password"));
 			// Return user object (excluding password for security)
-			user.setPassword(null);
+			user.setPassword(null); 
 			return ResponseEntity.ok(user);
 		} catch (Exception e) {
 			return ResponseEntity.status(401).body(e.getMessage());
