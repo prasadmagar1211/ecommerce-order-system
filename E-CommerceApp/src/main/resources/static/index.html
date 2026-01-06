@@ -18,7 +18,7 @@
 	--white: #ffffff;
 	--gray-100: #f8fafc;
 	--gray-200: #e2e8f0;
-	--gray-500: #64748b; 
+	--gray-500: #64748b;
 	--transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
@@ -297,15 +297,15 @@ body {
 
 .btn-buy-now {
 	background: var(--black);
-	color: white;  
+	color: white;
 }
 
-#signup{
+#signup {
 	color: white;
-} 
+}
 
 .product-info h3 {
-	font-size: 1.2rem; 
+	font-size: 1.2rem;
 	margin-bottom: 8px;
 	font-weight: 600;
 }
@@ -500,7 +500,7 @@ body {
 			<h2 style="font-weight: 800; margin-bottom: 10px;">Confirm
 				Logout</h2>
 			<p style="color: var(--gray-500);">Are you sure you want to
-				logout?</p> 
+				logout?</p>
 			<div class="modal-btns">
 				<button class="modal-btn btn-cancel" onclick="closeLogoutModal()">Cancel</button>
 				<button class="modal-btn btn-confirm" onclick="confirmLogout()">Yes,
@@ -523,9 +523,10 @@ body {
 					class="fa-solid fa-bag-shopping"></i> <span class="badge"
 					id="cart-count">0</span>
 				</a> <a href="login.html" class="auth-btn login-trigger"> Login </a> <a
-					href="signup.html" id="signup" class="auth-btn signup-trigger"> Signup </a>
+					href="signup.html" id="signup" class="auth-btn signup-trigger">
+					Signup </a>
 			</div>
-		</div> 
+		</div>
 	</header>
 
 	<section class="hero">
@@ -786,7 +787,7 @@ body {
         function confirmLogout() { 
             localStorage.removeItem('rapidUser'); 
             window.location.reload(); 
-        }
+        }   
 
         window.onload = () => { loadFeaturedProducts(); checkUser(); };
     </script>
