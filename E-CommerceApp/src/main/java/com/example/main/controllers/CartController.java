@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import com.example.main.models.Product;
 import com.example.main.models.User;
 import com.example.main.repositories.UserRepository;
-import com.example.main.repositories.ProductRepository;
+import com.example.main.repositories.ProductRepository; 
 import com.example.main.services.CartService;
 
 @RestController
