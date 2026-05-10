@@ -15,7 +15,7 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http
+        http 
             .csrf(csrf -> csrf.disable())
             .cors(cors -> cors.configurationSource(request -> {
                 CorsConfiguration config = new CorsConfiguration();
@@ -25,7 +25,7 @@ public class SecurityConfig {
                 return config;
             }))
             .authorizeHttpRequests(auth -> auth 
-                .requestMatchers("/api/admin/**").permitAll() // Open Admin API
+                .requestMatchers("/api/admin/**").permitAll()  
                 .requestMatchers("/api/products/**", "/api/contact/**").permitAll()
                 .requestMatchers("/api/cart/**").authenticated()
                 .anyRequest().permitAll()
